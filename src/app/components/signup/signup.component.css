@@ -1,0 +1,19 @@
+.signup-container {
+    max-width: 400px;
+    margin: 50px auto;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .is-invalid {
+    border-color: #dc3545;
+  }
+  
+  .invalid-feedback {
+    color: #dc3545;
+    font-size: 0.875em;
+    margin-top: 5px;
+  }
+  
