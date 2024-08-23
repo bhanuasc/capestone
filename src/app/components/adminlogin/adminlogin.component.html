@@ -1,0 +1,14 @@
+<form (ngSubmit)="onSubmit()" #adminLoginForm="ngForm">
+  <div class="form-group">
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" [(ngModel)]="admin.username" [ngModelOptions]="{standalone: true}" required class="form-control">
+</div>
+
+  <div class="form-group">
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" [(ngModel)]="admin.password" [ngModelOptions]="{standalone: true}" required class="form-control">  </div>
+
+  <button type="submit" class="btn btn-primary" [disabled]="!adminLoginForm.form.valid">Login</button>
+</form>
+
+

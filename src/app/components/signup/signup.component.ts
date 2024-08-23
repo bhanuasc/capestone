@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -18,21 +19,21 @@ export class SignupComponent {
     password: ''
   };
 
-  constructor(private http: HttpClient) {}
+
+  constructor(private http: HttpClient, private router: Router) {}
 
   onSubmit() {
     this.http.post('http://localhost:3000/api/signup', this.user)
       .subscribe(
-        response => {
-          console.log('User signed up successfully', response);
+        () => {
+          alert('Registered successfully!');
+          this.router.navigate(['/login']); // Redirect to login page after successful signup
         },
         error => {
-          console.error('Error signing up', error);
-          // Log error details for further investigation
-          if (error.error) {
-            console.error('Error details:', error.error);
+          if (error.error && error.error.details && error.error.details.includes('duplicate key error')) {
+            alert('User already exists.');
           } else {
-            console.error('Error details:', error.message);
+            alert('Error registering user.');
           }
         }
       );

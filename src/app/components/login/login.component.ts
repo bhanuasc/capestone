@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+import { AuthService } from '../../auth.service'; // Import AuthService
 
 interface LoginResponse {
   token: string;
@@ -21,25 +23,28 @@ export class LoginComponent {
     password: ''
   };
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router, private authService: AuthService) {}
 
   onSubmit() {
     this.http.post<LoginResponse>('http://localhost:3000/api/login', this.user)
       .subscribe(
         response => {
-          console.log('Login successful', response);
-          // Handle the JWT token received
+          alert('Login successful');
           localStorage.setItem('authToken', response.token);
+          this.authService.login(); // Set the login state in AuthService
+          this.router.navigate(['/home']); // Redirect to home page
         },
         error => {
-          console.error('Error logging in', error);
-          // Log error details for further investigation
-          if (error.error) {
-            console.error('Error details:', error.error);
+          if (error.error === 'Invalid email or password') {
+            alert('The email or password is incorrect.');
+          } else if (error.error === 'Invalid password') {
+            alert('The password is incorrect.');
           } else {
-            console.error('Error details:', error.message);
+            alert('An error occurred while logging in.');
           }
         }
       );
+
+      
   }
 }
