@@ -9,6 +9,8 @@ import { AdminusersComponent } from './components/adminusers/adminusers.componen
 import { AdminproductsComponent } from './components/adminproducts/adminproducts.component';
 import { AuthGuard } from './auth.guard';
 import { adminguardGuard } from './adminguard.guard';
+import { AdminAddProductComponent } from './components/admin-add-product/admin-add-product.component';
+import { AdminEditProductComponent } from './components/admin-edit-product/admin-edit-product.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'signup', pathMatch: 'full' },
@@ -19,6 +21,17 @@ export const routes: Routes = [
   { path: 'aboutus', component: AboutusComponent, canActivate: [AuthGuard] },
   {path: 'admin',component:AdminloginComponent},
 { path: 'admin/login', component: AdminloginComponent },
-  { path: 'admin/products', component: AdminproductsComponent, canActivate: [adminguardGuard] },
+  // { path: 'admin/products', component: AdminproductsComponent, canActivate: [adminguardGuard] },
   { path: 'admin/users', component: AdminusersComponent, canActivate: [adminguardGuard] },
+
+  {
+    path: 'admin/products',
+    component: AdminproductsComponent,
+    canActivate: [adminguardGuard],
+    children: [
+      { path: '', redirectTo: 'edit', pathMatch: 'full' }, // Redirect to a default sub-route
+      { path: 'add', component: AdminAddProductComponent },
+      { path: 'edit', component: AdminEditProductComponent }
+    ]
+  },
 ];

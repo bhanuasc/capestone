@@ -1,0 +1,30 @@
+.sub-navbar {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #444; /* Slightly different shade to differentiate from main navbar */
+    color: white;
+    margin-top: 10px;
+}
+
+.sub-navbar-nav {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.sub-navbar a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+.sub-navbar a.active {
+    font-weight: bold;
+}
+
+.sub-nav-item {
+    margin-left: 15px;
+}

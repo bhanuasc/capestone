@@ -1,0 +1,20 @@
+.sub-navbar {
+    background-color: #f8f9fa;
+    padding: 10px;
+  }
+  
+  .sub-navbar-nav {
+    list-style-type: none;
+    display: flex;
+    gap: 20px;
+  }
+  
+  .sub-nav-item a {
+    text-decoration: none;
+    color: #007bff;
+  }
+  
+  .sub-nav-item a.active {
+    font-weight: bold;
+  }
+  
