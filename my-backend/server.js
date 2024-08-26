@@ -26,13 +26,6 @@ const User = mongoose.model('User', new mongoose.Schema({
     password: { type: String, required: true }
 }));
 
-// Product Model
-// const Product = mongoose.model('Product', new mongoose.Schema({
-//     name: { type: String, required: true },
-//     description: { type: String, required: true },
-//     price: { type: Number, required: true },
-//     category: { type: String, required: true }
-// }));
 
 // Signup Route
 app.post('/api/signup', async (req, res) => {
@@ -93,24 +86,47 @@ app.get('/api/users', async (req, res) => {
     }
 });
 
+
+// Product Model
+const Product = mongoose.model('Product', new mongoose.Schema({
+    name: { type: String, required: true },
+    price: { type: Number, required: true },
+    description: { type: String, required: true },
+    category: { 
+        type: String, 
+        required: true, 
+        enum: ['laptop', 'mobile', 'electronics'] // Predefined categories
+    },
+}));
+
+
 // Add Product Route
-// app.post('/api/admin/add-product', async (req, res) => {
-//     try {
-//         const { name, description, price, category } = req.body;
+app.post('/api/products', async (req, res) => {
+    try {
+        const { name, price, description, category } = req.body;
 
-//         const product = new Product({
-//             name,
-//             description,
-//             price,
-//             category
-//         });
+        // Check if the category is valid
+        if (!['laptop', 'mobile', 'electronics'].includes(category)) {
+            return res.status(400).send({ error: 'Invalid category' });
+        }
 
-//         await product.save();
-//         res.status(201).send(product);
-//     } catch (error) {
-//         console.error('Error saving product:', error);
-//         res.status(400).send({ error: 'Error saving product', details: error.message });
-//     }
-// });
+        const product = new Product({
+            name,
+            price,
+            description,
+            category
+        });
+
+        const savedProduct = await product.save();
+        res.status(201).send(savedProduct);
+    } catch (error) {
+        console.error('Error adding product:', error);
+        res.status(400).send({ error: 'Error adding product', details: error.message });
+    }
+});
+
+
+
+
 
 app.listen(port, () => console.log(`Server running on port ${port}`));
