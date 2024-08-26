@@ -1,1 +1,36 @@
-<p>admin-edit-product works!</p>
+<div class="container">
+  <h2>Admin Edit Products</h2>
+
+  
+
+  <!-- Display success or error messages -->
+  <div *ngIf="message" [ngClass]="{'alert-success': messageType === 'success', 'alert-error': messageType === 'error'}" class="alert">
+    {{ message }}
+  </div>
+
+  <!-- Products List -->
+  <div class="product-list">
+    <div *ngFor="let product of products" class="product-card">
+      <div *ngIf="!product.editing">
+        <h3>{{ product.name }}</h3>
+        <p>Price: ${{ product.price }}</p>
+        <p>Description: {{ product.description }}</p>
+        <p>Category: {{ product.category }}</p>
+        <button (click)="editProduct(product)" class="btn">Edit</button>
+        <button (click)="deleteProduct(product._id)" class="btn">Delete</button>
+      </div>
+      <div *ngIf="product.editing">
+        <input [(ngModel)]="product.name" />
+        <input [(ngModel)]="product.price" type="number" />
+        <textarea [(ngModel)]="product.description"></textarea>
+        <select [(ngModel)]="product.category">
+          <option value="laptop">Laptop</option>
+          <option value="mobile">Mobile</option>
+          <option value="electronics">Electronics</option>
+        </select>
+        <button (click)="saveProduct(product)" class="btn">Save</button>
+        <button (click)="cancelEdit(product)" class="btn">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>

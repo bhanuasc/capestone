@@ -125,6 +125,65 @@ app.post('/api/products', async (req, res) => {
     }
 });
 
+// Get All Products Route
+app.get('/api/products', async (req, res) => {
+    try {
+        const products = await Product.find({});
+        res.status(200).send(products);
+    } catch (error) {
+        console.error('Error fetching products:', error);
+        res.status(500).send({ error: 'Server error', details: error.message });
+    }
+});
+
+// Update Product Route
+app.put('/api/products/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { name, price, description, category } = req.body;
+
+        // Check if the category is valid
+        if (!['laptop', 'mobile', 'electronics'].includes(category)) {
+            return res.status(400).send({ error: 'Invalid category' });
+        }
+
+        const updatedProduct = await Product.findByIdAndUpdate(
+            id,
+            { name, price, description, category },
+            { new: true } // Return the updated document
+        );
+
+        if (!updatedProduct) {
+            return res.status(404).send({ error: 'Product not found' });
+        }
+
+        res.status(200).send(updatedProduct);
+    } catch (error) {
+        console.error('Error updating product:', error);
+        res.status(400).send({ error: 'Error updating product', details: error.message });
+    }
+});
+
+// Delete Product Route
+app.delete('/api/products/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const product = await Product.findByIdAndDelete(id);
+        if (!product) {
+            return res.status(404).send({ error: 'Product not found' });
+        }
+
+        res.status(200).send({ message: 'Product deleted successfully' });
+    } catch (error) {
+        console.error('Error deleting product:', error);
+        res.status(500).send({ error: 'Server error', details: error.message });
+    }
+});
+
+
+
+
 
 
 
