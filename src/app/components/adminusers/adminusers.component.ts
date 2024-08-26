@@ -1,12 +1,31 @@
-import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-adminusers',
   standalone: true,
-  imports: [],
+  imports: [HttpClientModule,CommonModule], // Import HttpClientModule directly in the component
   templateUrl: './adminusers.component.html',
-  styleUrl: './adminusers.component.css'
+  styleUrls: ['./adminusers.component.css']
 })
-export class AdminusersComponent {
+export class AdminusersComponent implements OnInit {
+  users: any[] = [];
 
+  constructor(private http: HttpClient) {}
+
+  ngOnInit(): void {
+    this.fetchUsers();
+  }
+
+  fetchUsers(): void {
+    this.http.get<any[]>('http://localhost:3000/api/users').subscribe(
+      (data) => {
+        this.users = data;
+      },
+      (error) => {
+        console.error('Error fetching users:', error);
+      }
+    );
+  }
 }
