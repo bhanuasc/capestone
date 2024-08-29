@@ -1,10 +1,11 @@
 <div class="container">
   <h2>Admin Edit Products</h2>
 
-  
-
-  <!-- Display success or error messages -->
-  <div *ngIf="message" [ngClass]="{'alert-success': messageType === 'success', 'alert-error': messageType === 'error'}" class="alert">
+  <!-- Alert Box -->
+  <div 
+    *ngIf="message" 
+    class="alert" 
+    [ngClass]="{'alert-success': messageType === 'success', 'alert-error': messageType === 'error', 'fade-out': fadeOut}">
     {{ message }}
   </div>
 
@@ -13,21 +14,24 @@
     <div *ngFor="let product of products" class="product-card">
       <div *ngIf="!product.editing">
         <h3>{{ product.name }}</h3>
+        <p> <img [src]="product.imageUrl" alt="{{ product.name }}" width="100"></p>
         <p>Price: ${{ product.price }}</p>
         <p>Description: {{ product.description }}</p>
         <p>Category: {{ product.category }}</p>
+        
         <button (click)="editProduct(product)" class="btn">Edit</button>
         <button (click)="deleteProduct(product._id)" class="btn">Delete</button>
       </div>
       <div *ngIf="product.editing">
-        <input [(ngModel)]="product.name" />
-        <input [(ngModel)]="product.price" type="number" />
-        <textarea [(ngModel)]="product.description"></textarea>
+        <input [(ngModel)]="product.name" placeholder="Name" />
+        <input [(ngModel)]="product.price" type="number" placeholder="Price" />
+        <textarea [(ngModel)]="product.description" placeholder="Description"></textarea>
         <select [(ngModel)]="product.category">
           <option value="laptop">Laptop</option>
           <option value="mobile">Mobile</option>
           <option value="electronics">Electronics</option>
         </select>
+        <input [(ngModel)]="product.imageUrl" placeholder="Image URL" />
         <button (click)="saveProduct(product)" class="btn">Save</button>
         <button (click)="cancelEdit(product)" class="btn">Cancel</button>
       </div>

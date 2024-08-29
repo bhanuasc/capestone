@@ -1,0 +1,46 @@
+<div *ngIf="alertVisible" class="alert" [ngClass]="alertType">
+  {{ alertMessage }}
+</div>
+
+<div>
+  <h2>Checkout</h2>
+
+  <div>
+    <h3>Cart Items</h3>
+    <ul>
+      <li *ngFor="let product of cartProducts">
+        {{ product.name }} - {{ product.quantity }} x {{ product.price | currency }}
+      </li>
+    </ul>
+  </div>
+
+  <div>
+    <h3>Total Price: {{ totalPrice | currency }}</h3>
+    <h3>GST (18%): {{ gst | currency }}</h3>
+    <h3>Delivery Charges: {{ deliveryCharges | currency }}</h3>
+    <h3>Final Amount: {{ finalAmount | currency }}</h3>
+  </div>
+
+  <div>
+    <h3>Payment Method</h3>
+    <select (change)="onPaymentMethodChange($event)">
+      <option value="cod">Cash on Delivery</option>
+      <option value="upi">UPI</option>
+      <option value="card">Card</option>
+    </select>
+  </div>
+
+  <div *ngIf="selectedPaymentMethod === 'upi'">
+    <h3>UPI ID</h3>
+    <input [(ngModel)]="upiId" type="text" placeholder="Enter UPI ID">
+  </div>
+
+  <div *ngIf="selectedPaymentMethod === 'card'">
+    <h3>Card Details</h3>
+    <input [(ngModel)]="cardDetails.cardNumber" type="text" placeholder="Card Number">
+    <input [(ngModel)]="cardDetails.cardExpiry" type="text" placeholder="Expiry Date">
+    <input [(ngModel)]="cardDetails.cardCvc" type="text" placeholder="CVC">
+  </div>
+
+  <button (click)="onCheckout()">Place Order</button>
+</div>

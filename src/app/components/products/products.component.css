@@ -1,80 +1,166 @@
-.container {
-    max-width: 1200px; /* Adjust the max-width as needed */
-    margin: 0 auto;
-    padding: 15px;
-  }
-  
-  .product-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 15px;
-  }
-  
-  .product-card {
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    position: relative;
-    background: #fff; /* Background color for better visibility */
-  }
-  
-  .product-card input,
-  .product-card textarea,
-  .product-card select {
-    width: calc(100% - 16px); /* Full width minus padding */
-    margin-bottom: 10px;
-  }
-  
-  .product-card input,
-  .product-card select,
-  .product-card textarea {
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 8px;
-  }
-  
-  .product-card .btn {
-    margin-right: 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .product-card .btn:hover {
-    background-color: #0056b3;
-  }
-  
+.product-container {
+  max-width: 1200px; /* Adjust as needed */
+  margin: 0 auto;
+  padding: 15px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 columns per row */
+  gap: 15px; /* Space between cards */
+}
+
+.product-card {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px; /* Adjust for initial smaller size */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background: #fff;
+  text-align: center;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease;
+  transform: scale(0.9); /* Initial smaller size */
+  overflow: hidden; /* Ensure content doesn’t overflow the card */
+}
+
+.product-card:hover {
+  transform: scale(1.1); /* Scale up the card on hover */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Enhance shadow on hover */
+  padding: 20px; /* Adjust padding to accommodate content */
+}
+
+.product-card img {
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto; /* Center align the image */
+}
+
+.product-card h3,
+.product-card p {
+  margin: 5px 0; /* Space around text */
+}
+
+.product-card .description {
+  display: none; /* Hide description by default */
+  margin-top: 10px; /* Space between content and description */
+  color: #333; /* Text color */
+}
+
+.product-card:hover .description {
+  display: block; /* Show description on hover */
+}
+
+.product-card .btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 12px; /* Adjusted padding for button */
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px; /* Space above the button */
+}
+
+.product-card .btn:hover {
+  background-color: #0056b3;
+}
+
+/* Alert Styles */
+.alert {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 15px;
+  border-radius: 5px;
+  background-color: #f8d7da; /* Default error color */
+  color: #721c24; /* Default error text color */
+  opacity: 1;
+  transition: opacity 0.5s ease-out; /* Transition for opacity */
+  z-index: 1000;
+}
+
+/* Success message styles */
+.alert-success {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+/* Error message styles */
+.alert-error {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+/* Fade-out animation */
+.fade-out {
+  opacity: 0;
+}
 
 
-  .product-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-  }
-  
-  .product-card {
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: calc(33.33% - 20px); /* Adjust width to fit 3 cards per row */
-  }
-  
-  .btn {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .btn:hover {
-    background-color: #0056b3;
-  }
-  
-  
+/* Existing CSS for Product Cards and Alert remains unchanged */
+
+/* Filter Button Styles */
+.filter-container {
+  max-width: 1200px; /* Adjust as needed */
+  margin: 0 auto;
+  padding: 15px;
+  display: flex;
+  justify-content: flex-end; /* Align filter button to the right */
+  margin-bottom: 20px; /* Space between filter button and product cards */
+}
+
+.filter-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-right: 10px;
+}
+
+.filter-btn:hover {
+  background-color: #0056b3;
+}
+
+.filter-menu {
+  display: none;
+  position: absolute;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.filter-menu.show {
+  display: block;
+}
+
+.filter-menu select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+/* Existing CSS remains unchanged */
+
+/* Filter Button Group Styles */
+.filter-btn-group {
+  display: flex;
+  gap: 10px; /* Space between buttons */
+}
+
+.filter-btn.remove {
+  background-color: #dc3545; /* Red background for remove button */
+}
+
+.filter-btn.remove:hover {
+  background-color: #c82333;
+}
+
+

@@ -1,0 +1,103 @@
+/* Position the alert at the bottom end of the screen */
+.alert {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 15px;
+    border-radius: 5px;
+    background-color: #d4edda; /* Default success color */
+    color: #155724; /* Default success text color */
+    opacity: 1;
+    transition: opacity 0.5s ease-out;
+    z-index: 1000;
+  }
+  
+  /* Fade-out animation */
+  .fade-out {
+    opacity: 0;
+  }
+  
+  /* Container Styling */
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #444444; /* Dark background matching sub-navbar */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    color: #E0E0E0; /* Light grey text color */
+  }
+  
+  /* Form Heading */
+  .container h2 {
+    color: #FFFFFF; /* White color for headings */
+    margin-bottom: 20px;
+  }
+  
+  /* Form Labels */
+  .container label {
+    color: #E0E0E0;
+    font-weight: bold;
+    margin-bottom: 8px;
+    display: block;
+  }
+  
+  /* Form Inputs */
+  .container .form-control {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    background-color: #333333; /* Darker background for input fields */
+    color: #E0E0E0; /* Light grey text */
+    border: 1px solid #555555; /* Slightly lighter border */
+    border-radius: 4px;
+  }
+  
+  /* Form Input Focus */
+  .container .form-control:focus {
+    outline: none;
+    border-color: #007bff; /* Blue border on focus */
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5); /* Subtle blue glow */
+  }
+  
+  /* Form Button */
+  .container .btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff; /* Blue button color */
+    border: none;
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  /* Button Hover Effect */
+  .container .btn:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+  }
+  
+  
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+      display: none;
+    }
+  }
+  
+  /* Media Query for Smaller Screens */
+  @media (max-width: 768px) {
+    .container {
+      padding: 15px;
+    }
+  
+    .btn {
+      padding: 12px;
+    }
+  }
+  

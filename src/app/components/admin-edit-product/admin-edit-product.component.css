@@ -1,75 +1,102 @@
 .container {
-    max-width: 1200px; /* Adjust the max-width as needed */
-    margin: 0 auto;
-    padding: 15px;
-  }
-  
-  .product-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 15px;
-  }
-  
-  .product-card {
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    position: relative;
-    background: #fff; /* Background color for better visibility */
-  }
-  
-  .product-card input,
-  .product-card textarea,
-  .product-card select {
-    width: calc(100% - 16px); /* Full width minus padding */
-    margin-bottom: 10px;
-  }
-  
-  .product-card input,
-  .product-card select,
-  .product-card textarea {
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 8px;
-  }
-  
-  .product-card .btn {
-    margin-right: 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .product-card .btn:hover {
-    background-color: #0056b3;
-  }
-  
-  .alert {
-    position: fixed;
-    top: 15px; /* Adjust this to position the alert vertically */
-    left: 15px; /* Position it from the left end of the screen */
-    padding: 10px 20px;
-    border-radius: 5px;
-    color: white;
-    font-weight: bold;
-    z-index: 9999; /* Make sure it's on top of other elements */
-    transition: opacity 0.5s ease; /* Fade out effect */
-    opacity: 0;
-  }
-  
-  .alert.show {
-    opacity: 1;
-  }
-  
-  .alert-success {
-    background-color: #28a745; /* Green color for success */
-  }
-  
-  .alert-error {
-    background-color: #dc3545; /* Red color for error */
-  }
-  
+  max-width: 1200px; /* Adjust the max-width as needed */
+  margin: 0 auto;
+  padding: 15px;
+}
+
+.product-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 15px;
+}
+
+.product-card {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.product-card img {
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  max-width: 100px;
+  margin-bottom: 10px;
+}
+
+.product-card .form-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  width: 100%; /* Ensure it takes up the full width */
+}
+
+.product-card .form-group label {
+  width: 100px; /* Fixed width for labels */
+  margin-right: 10px; /* Space between label and input */
+  text-align: right; /* Right-align the label text */
+}
+
+.product-card input,
+.product-card textarea,
+.product-card select {
+  flex: 1; /* Take up the remaining space */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 8px;
+}
+
+.product-card input,
+.product-card select,
+.product-card textarea {
+  width: calc(100% - 16px); /* Full width minus padding */
+  margin-bottom: 10px;
+}
+
+.product-card .btn {
+  margin-right: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.product-card .btn:hover {
+  background-color: #0056b3;
+}
+
+/* Alert Box */
+.alert {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 15px;
+  border-radius: 5px;
+  background-color: #f8d7da;
+  color: #721c24;
+  opacity: 1;
+  transition: opacity 0.5s ease-out;
+  z-index: 1000;
+}
+
+.alert-success {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.alert-error {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.fade-out {
+  opacity: 0;
+}

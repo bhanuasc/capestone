@@ -1,28 +1,39 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [CommonModule, HttpClientModule],
+  imports: [CommonModule, HttpClientModule,FormsModule],
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']
 })
-export class ProductsComponent {
-  products: any[] | undefined;
+export class ProductsComponent implements OnInit {
+  products: any[] = [];
   cart: any[] = []; // Array to hold cart items
+  filteredProducts: any[] = []; // Products after filtering
+  alertMessage: string | null = null;
+  alertType: 'success' | 'error' | null = null;
+  filterMenuVisible = false;
+  selectedPriceRange: string = '';
+  selectedCategory: string = '';
+  fadeOut = false; // New property to control the fade-out effect
+
 
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
     this.loadProducts();
+    this.loadCart(); // Load cart items from localStorage
   }
 
   loadProducts(): void {
     this.http.get<any[]>('http://localhost:3000/api/products').subscribe({
       next: (data) => {
         this.products = data;
+        this.filteredProducts = data; // Initialize with all products
       },
       error: (err) => {
         console.error('Error fetching products:', err);
@@ -30,19 +41,67 @@ export class ProductsComponent {
     });
   }
 
+  loadCart(): void {
+    const savedCart = localStorage.getItem('cart');
+    if (savedCart) {
+      this.cart = JSON.parse(savedCart);
+    }
+  }
+
   addToCart(product: any): void {
-    console.log('Adding to cart:', product);
     const existingProduct = this.cart.find(p => p._id === product._id);
     if (existingProduct) {
-      alert('Product already in cart');
-      console.log('Product already in cart:', existingProduct);
+      this.showAlert('Product already in cart', 'error');
     } else {
       this.cart.push(product);
       localStorage.setItem('cart', JSON.stringify(this.cart));
-      alert('Product added to cart');
-      console.log('Product added to cart:', this.cart);
+      this.showAlert('Product added to cart', 'success');
+    }
+  }
+
+  showAlert(message: string, type: 'success' | 'error'): void {
+    this.alertMessage = message;
+    this.alertType = type;
+    this.fadeOut = false; // Reset fadeOut before showing alert
+  
+    // Ensure the element exists and use type assertion
+    const alertElement = document.querySelector('.alert') as HTMLElement;
+    if (alertElement) {
+      // Force reflow to apply styles before starting transition
+      void alertElement.offsetWidth;
+  
+      setTimeout(() => {
+        this.fadeOut = true; // Start fading out after 3 seconds
+      }, 3000); // Time before starting to fade out
     }
   }
   
   
+
+  toggleFilterMenu(): void {
+    this.filterMenuVisible = !this.filterMenuVisible;
+  }
+
+  applyFilters(): void {
+    let filtered = this.products;
+
+    if (this.selectedPriceRange) {
+      const [minPrice, maxPrice] = this.selectedPriceRange.split('-').map(v => v === '200+' ? Infinity : parseFloat(v));
+      filtered = filtered.filter(product => product.price >= minPrice && product.price <= maxPrice);
+    }
+
+    if (this.selectedCategory) {
+      filtered = filtered.filter(product => product.category === this.selectedCategory);
+    }
+
+    this.filteredProducts = filtered;
+    this.filterMenuVisible = false; // Hide filter menu after applying
+  }
+
+  removeFilters(): void {
+    this.selectedPriceRange = '';
+    this.selectedCategory = '';
+    this.filteredProducts = this.products; // Reset to all products
+    this.filterMenuVisible = false; // Hide filter menu after resetting
+  }
 }

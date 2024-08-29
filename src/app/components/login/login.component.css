@@ -1,0 +1,117 @@
+/* Global Box-Sizing */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Body Styling */
+body {
+  padding-top: 70px; /* Adjusts for fixed navbar */
+  background-color: #f5f5f5; /* Light grey background for contrast */
+  color: #333333; /* Dark grey text for readability */
+  font-family: Arial, sans-serif; /* Default font */
+  margin: 0;
+}
+
+/* Common alert box styling */
+.alert {
+  position: fixed;
+  right: 20px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  z-index: 1000;
+  transition: opacity 1s ease-out; /* 1-second fade-out effect */
+}
+
+/* Success alert positioned below the navbar */
+.alert.success {
+  top: 20px; /* Adjust this value based on your navbar height */
+  background-color: #4caf50;
+  color: white;
+}
+
+/* Error alert positioned slightly below the success alert */
+.alert.error {
+  top: 70px; /* Adjust this value for spacing from the success alert */
+  background-color: #f44336;
+  color: white;
+}
+
+/* Fading out */
+.fade-out {
+  opacity: 0;
+}
+
+
+  
+/* Login Container */
+.login-container {
+  max-width: 400px;
+  margin: 20px auto; /* Center horizontally */
+  padding: 20px;
+  border-radius: 5px;
+  background-color: #fff; /* White background for the form */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+/* Form Group */
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #333; /* Dark grey text */
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: border-color 0.3s;
+}
+
+.form-group input:focus {
+  border-color: #555; /* Darker border on focus */
+}
+
+/* Button Styling */
+.btn {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  background-color: #414141; /* Default button color */
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.btn-primary {
+  background-color: #3b3b3b; /* Primary button color */
+}
+
+.btn-primary:hover {
+  background-color: #585858; /* Darker color on hover */
+  transform: scale(1.05); /* Slight scale effect on hover */
+}
+
+/* Media Query for smaller screens */
+@media (max-width: 768px) {
+  .login-container {
+    padding: 15px;
+  }
+
+  .form-group input {
+    font-size: 14px;
+  }
+
+  .btn {
+    font-size: 14px;
+  }
+}

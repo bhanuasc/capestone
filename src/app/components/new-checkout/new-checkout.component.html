@@ -1,0 +1,46 @@
+<div *ngIf="alertVisible" [ngClass]="{'alert-success': alertType === 'success', 'alert-error': alertType === 'error'}">
+    {{ alertMessage }}
+  </div>
+  
+  <h2>Checkout</h2>
+  <div *ngIf="cartProducts.length > 0">
+    <h3>Cart Items</h3>
+    <ul>
+      <li *ngFor="let product of cartProducts">
+        {{ product.name }} - {{ product.price | currency }} x {{ product.quantity }}
+      </li>
+    </ul>
+    <p>Total Price: {{ totalPrice | currency }}</p>
+    <p>GST (18%): {{ gst | currency }}</p>
+    <p>Delivery Charges: {{ deliveryCharges | currency }}</p>
+    <p><strong>Final Amount: {{ finalAmount | currency }}</strong></p>
+  
+    <h3>Payment Method</h3>
+    <select (change)="onPaymentMethodChange($event)">
+      <option value="">Select Payment Method</option>
+      <option value="upi">UPI</option>
+      <option value="card">Card</option>
+      <option value="cod">Cash on Delivery</option>
+    </select>
+  
+    <div *ngIf="selectedPaymentMethod === 'upi'">
+      <label for="upiId">UPI ID:</label>
+      <input id="upiId" [(ngModel)]="upiId" type="text" />
+    </div>
+  
+    <div *ngIf="selectedPaymentMethod === 'card'">
+      <label for="cardNumber">Card Number:</label>
+      <input id="cardNumber" [(ngModel)]="cardDetails.cardNumber" type="text" />
+      <label for="cardExpiry">Expiry Date:</label>
+      <input id="cardExpiry" [(ngModel)]="cardDetails.cardExpiry" type="text" />
+      <label for="cardCvc">CVC:</label>
+      <input id="cardCvc" [(ngModel)]="cardDetails.cardCvc" type="text" />
+    </div>
+  
+    <button (click)="onCheckout()">Place Order</button>
+  </div>
+  
+  <div *ngIf="cartProducts.length === 0">
+    <p>Your cart is empty.</p>
+  </div>
+  

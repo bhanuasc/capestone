@@ -1,0 +1,148 @@
+.container-fluid {
+  padding: 40px 60px;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+}
+
+.row {
+  display: flex;
+  /* justify-content: space-between; */
+}
+
+.order-summary, .payment-section {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.order-summary {
+  max-width: 45%;
+}
+
+.payment-section {
+  max-width: 50%;
+}
+
+.order-summary h5 {
+  color: #000;
+  font-weight: 500;
+}
+
+.order-summary h3 {
+  font-size: 2rem;
+  margin-top: 20px;
+  color: #333;
+}
+
+.order-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.product-image {
+  width: 60px;
+  height: 60px;
+  border-radius: 4px;
+  margin-right: 15px;
+  border: 1px solid #ddd;
+}
+
+.order-item > div {
+  flex: 1;
+}
+
+.order-item .text-muted {
+  font-size: 0.9rem;
+  color: #6c757d;
+}
+
+.price {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+  margin-left: auto;
+}
+
+.order-total {
+  margin-top: 30px;
+}
+
+.order-total .row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+.total-due {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.payment-section h5 {
+  margin-bottom: 25px; /* Increase bottom margin for better spacing */
+  font-size: 1.3rem; /* Slightly increase font size for better readability */
+  color: #333;
+}
+
+.payment-section .form-group {
+  margin-bottom: 25px; /* Increase bottom margin for more spacing between form groups */
+}
+
+.payment-section .form-control {
+  padding: 12px; /* Increase padding for better spacing inside the input fields */
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-top: 10px; /* Increase top margin for more spacing between label and input */
+}
+
+.payment-section .form-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px; /* Add a gap between the input fields */
+}
+
+.payment-section .form-row .col {
+  flex: 1;
+}
+
+.payment-section .btn-primary {
+  background-color: #333;
+  border: none;
+  color: #fff;
+  padding: 15px;
+  font-size: 1rem;
+  width: 100%;
+  border-radius: 4px;
+  margin-top: 30px; /* Increase top margin for more spacing before the button */
+}
+
+.payment-section .btn-primary:hover {
+  background-color: #555;
+  transition: background-color 0.3s ease;
+}
+
+.payment-section label {
+  font-size: 1rem; /* Increase font size for better readability */
+  color: #666;
+  margin-bottom: 5px; /* Add margin for spacing between label and input */
+  display: inline-block; /* Ensure spacing applies correctly */
+}
+
+.billing-checkbox {
+  display: flex;
+  align-items: center;
+  margin-top: 20px; /* Increase margin for better spacing above checkbox */
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.billing-checkbox input {
+  margin-right: 10px;
+}
