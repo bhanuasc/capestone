@@ -27,6 +27,7 @@
         <li class="nav-item" *ngIf="authService.isLoggedIn() && !authService.isAdminLoggedIn()">
             <a routerLink="/checkout" routerLinkActive="active">Checkout</a>
         </li>
+       
         <li class="nav-item" *ngIf="authService.isLoggedIn() && !authService.isAdminLoggedIn()">
             <a (click)="onLogout()" style="cursor: pointer;">Logout</a>
         </li>

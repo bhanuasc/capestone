@@ -86,11 +86,6 @@ export class CartComponent implements OnInit {
   }
 
   checkout(): void {
-    if (this.cartProducts.length === 0) {
-        this.showAlert('Your cart is empty. Please add items to your cart before proceeding.', 'error');
-        return;
-    }
-    
-    this.router.navigate(['/checkout']); // Redirect to the checkout page
-  }
+alert("placed succesfully")
+}
 }

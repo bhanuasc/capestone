@@ -1,46 +1,82 @@
-<div *ngIf="alertVisible" class="alert" [ngClass]="alertType">
-  {{ alertMessage }}
-</div>
-
 <div>
-  <h2>Checkout</h2>
-
-  <div>
-    <h3>Cart Items</h3>
-    <ul>
-      <li *ngFor="let product of cartProducts">
-        {{ product.name }} - {{ product.quantity }} x {{ product.price | currency }}
-      </li>
-    </ul>
+    <h2>Checkout</h2>
+  
+    <div *ngIf="cartProducts.length > 0">
+      <div class="cart-summary">
+        <ul>
+          <li *ngFor="let product of cartProducts">
+            {{ product.name }} - {{ product.price | currency }} x {{ product.quantity }}
+          </li>
+        </ul>
+  
+        <h3>Total Amount: {{ totalAmount | currency }}</h3>
+      </div>
+  
+      <div class="checkout-details">
+        <!-- User Email (non-editable) -->
+        <label>
+          Email:
+          <input type="text" [value]="email" >
+        </label>
+  
+        <!-- Delivery Address -->
+        <label>
+          Delivery Address:
+          <textarea [(ngModel)]="address" placeholder="Enter your delivery address"></textarea>
+        </label>
+  
+        <!-- Payment Method Selection -->
+        <fieldset>
+          <legend>Payment Method</legend>
+          <label>
+            <input type="radio" name="paymentMethod" value="cash" (change)="onPaymentMethodChange('cash')" [checked]="paymentMethod === 'cash'">
+            Cash
+          </label>
+          <label>
+            <input type="radio" name="paymentMethod" value="credit-card" (change)="onPaymentMethodChange('credit-card')" [checked]="paymentMethod === 'credit-card'">
+            Credit Card
+          </label>
+          <label>
+            <input type="radio" name="paymentMethod" value="upi" (change)="onPaymentMethodChange('upi')" [checked]="paymentMethod === 'upi'">
+            UPI
+          </label>
+        </fieldset>
+  
+        <!-- Credit Card Details -->
+        <div *ngIf="paymentMethod === 'credit-card'" class="payment-details">
+          <label>
+            Card Number:
+            <input type="text" [(ngModel)]="cardDetails.cardNumber" placeholder="1234 5678 9012 3456">
+          </label>
+          <label>
+            Expiry Date:
+            <input type="text" [(ngModel)]="cardDetails.cardExpiry" placeholder="MM/YY">
+          </label>
+          <label>
+            CVV:
+            <input type="text" [(ngModel)]="cardDetails.cardCVV" placeholder="123">
+          </label>
+        </div>
+  
+        <!-- UPI Details -->
+        <div *ngIf="paymentMethod === 'upi'" class="payment-details">
+          <label>
+            UPI ID:
+            <input type="text" [(ngModel)]="upiId" placeholder="example@upi">
+          </label>
+        </div>
+  
+        <button (click)="checkout()">Checkout</button>
+      </div>
+    </div>
+  
+    <div *ngIf="cartProducts.length === 0">
+      <p>Your cart is empty.</p>
+    </div>
+  
+    <!-- Alert System -->
+    <div *ngIf="alertVisible" [ngClass]="{'alert-success': alertType === 'success', 'alert-error': alertType === 'error'}">
+      {{ alertMessage }}
+    </div>
   </div>
-
-  <div>
-    <h3>Total Price: {{ totalPrice | currency }}</h3>
-    <h3>GST (18%): {{ gst | currency }}</h3>
-    <h3>Delivery Charges: {{ deliveryCharges | currency }}</h3>
-    <h3>Final Amount: {{ finalAmount | currency }}</h3>
-  </div>
-
-  <div>
-    <h3>Payment Method</h3>
-    <select (change)="onPaymentMethodChange($event)">
-      <option value="cod">Cash on Delivery</option>
-      <option value="upi">UPI</option>
-      <option value="card">Card</option>
-    </select>
-  </div>
-
-  <div *ngIf="selectedPaymentMethod === 'upi'">
-    <h3>UPI ID</h3>
-    <input [(ngModel)]="upiId" type="text" placeholder="Enter UPI ID">
-  </div>
-
-  <div *ngIf="selectedPaymentMethod === 'card'">
-    <h3>Card Details</h3>
-    <input [(ngModel)]="cardDetails.cardNumber" type="text" placeholder="Card Number">
-    <input [(ngModel)]="cardDetails.cardExpiry" type="text" placeholder="Expiry Date">
-    <input [(ngModel)]="cardDetails.cardCvc" type="text" placeholder="CVC">
-  </div>
-
-  <button (click)="onCheckout()">Place Order</button>
-</div>
+  

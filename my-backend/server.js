@@ -5,7 +5,6 @@ const cors = require('cors');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-
 const app = express();
 const port = process.env.PORT || 3000;
 const JWT_SECRET = 'your_jwt_secret'; // Replace with a secure key
@@ -17,6 +16,7 @@ app.use(cors({
     origin: 'http://localhost:4200', // Adjust this to match your Angular app's URL
     credentials: true
 }));
+
 // MongoDB Connection
 const mongoURI = 'mongodb+srv://bhanudb:bhanudb@ecommerce.ugrcsly.mongodb.net/capestoneDB?retryWrites=true&w=majority';
 mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -46,33 +46,19 @@ const Product = mongoose.model('Product', new mongoose.Schema({
     }
 }));
 
-
-
+// Authentication Middleware
 const authenticateToken = (req, res, next) => {
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1];
-  
-    if (token == null) return res.sendStatus(401);
-  
+
+    if (token == null) return res.sendStatus(401); // If no token is provided
+
     jwt.verify(token, JWT_SECRET, (err, user) => {
-      if (err) return res.sendStatus(403);
-      req.user = user;
-      next();
+        if (err) return res.sendStatus(403); // If token is invalid
+        req.user = user;
+        next();
     });
-  };
-
-  app.get('/api/users', async (req, res) => {
-    try {
-        const users = await User.find({}, 'username email');
-        res.status(200).send(users);
-    } catch (error) {
-        console.error('Error fetching users:', error);
-        res.status(500).send({ error: 'Server error', details: error.message });
-    }
-});
-
-
-
+};
 
 // Routes
 // Signup Route
@@ -88,6 +74,21 @@ app.post('/api/signup', async (req, res) => {
         res.status(400).send({ error: 'Error saving user', details: error.message });
     }
 });
+// In your server file (e.g., server.js)
+app.get('/api/user', authenticateToken, async (req, res) => {
+  try {
+    const userId = req.user.userId;
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).send({ error: 'User not found' });
+    }
+    res.status(200).send({ email: user.email });
+  } catch (error) {
+    console.error('Error fetching user details:', error);
+    res.status(500).send({ error: 'Server error', details: error.message });
+  }
+});
+
 
 // Login Route
 app.post('/api/login', async (req, res) => {
@@ -226,63 +227,63 @@ app.delete('/api/cart/:productId', authenticateToken, async (req, res) => {
     }
 });
 
-app.post('/api/orders', (req, res) => {
-    console.log('Order received:', req.body);
-    res.status(200).json({ message: 'Order placed successfully!' });
-});
-// Order Model
-// New Order Model
-const NewOrder = mongoose.model('NewOrder', new mongoose.Schema({
-    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-    productDetails: [{
-        name: { type: String, required: true },
-        price: { type: Number, required: true },
-        quantity: { type: Number, required: true }
+const Order = mongoose.model('Order', new mongoose.Schema({
+    email: { type: String, required: false }, // No longer required
+    cartProducts: [{  // Assuming this structure for cart products
+        productId: { type: mongoose.Schema.Types.ObjectId, ref: 'Product', required: false }, // No longer required
+        quantity: { type: Number, required: false } // No longer required
     }],
-    totalPrice: { type: Number, required: true },
-    gst: { type: Number, required: true },
-    deliveryCharges: { type: Number, required: true },
-    finalAmount: { type: Number, required: true },
-    paymentMethod: { type: String, enum: ['upi', 'card', 'cod'], required: true },
-    upiId: { type: String, required: false },
+    totalAmount: { type: Number, required: false, default: 0 }, // Default to 0
+    address: { type: String, required: false, default: '' }, // Default to empty string
+    paymentMethod: { type: String, required: false, default: '' }, // Default to empty string
     cardDetails: {
-        cardNumber: { type: String, required: false },
-        cardExpiry: { type: String, required: false },
-        cardCvc: { type: String, required: false }
+        cardNumber: { type: String, required: false, default: '' }, // Default to empty string
+        cardExpiry: { type: String, required: false, default: '' }, // Default to empty string
+        cardCVV: { type: String, required: false, default: '' } // Default to empty string
     },
-    createdAt: { type: Date, default: Date.now }
-}));
+    upiId: { type: String, required: false, default: '' } // Default to empty string
+}, { timestamps: true }));
 
-// New Add Order Route
-app.post('/api/new-orders', authenticateToken, async (req, res) => {
+
+
+// Save Checkout Details
+// Checkout Route
+// Checkout Route
+app.post('/api/checkout', async (req, res) => {
     try {
-      console.log('Order request body:', req.body); // Log request body
-      const { productDetails, totalPrice, gst, deliveryCharges, finalAmount, paymentMethod, upiId, cardDetails } = req.body;
-      const userId = req.user.userId;
-  
-      const newOrder = new NewOrder({
-        userId,
-        productDetails,
-        totalPrice,
-        gst,
-        deliveryCharges,
-        finalAmount,
-        paymentMethod,
-        upiId,
-        cardDetails
-      });
-  
-      const savedOrder = await newOrder.save();
-      console.log('Order saved:', savedOrder); // Log saved order
-  
-      res.status(201).json(savedOrder);
+        const { cartProducts, totalAmount, email, address, paymentMethod, cardDetails, upiId } = req.body;
+
+        // Ensure cartProducts is provided
+        if (!cartProducts || cartProducts.length === 0) {
+            return res.status(400).send({ error: 'No products in cart' });
+        }
+
+        // Create an order with provided fields or default values
+        const order = {
+            cartProducts,
+            totalAmount: totalAmount || 0,  // Default to 0 if not provided
+            email: email || '',             // Default to empty string if not provided
+            address: address || '',         // Default to empty string if not provided
+            paymentMethod: paymentMethod || '', // Default to empty string if not provided
+            cardDetails: cardDetails || {}, // Default to empty object if not provided
+            upiId: upiId || '',             // Default to empty string if not provided
+            createdAt: new Date()
+        };
+
+        // Save order to the database
+        const newOrder = new Order(order);
+        await newOrder.save();
+
+        res.status(201).send(newOrder);
     } catch (error) {
-      console.error('Error placing order:', error);
-      res.status(500).json({ error: 'Server error', details: error.message });
+        console.error('Error placing order:', error);
+        res.status(500).send({ error: 'Server error', details: error.message });
     }
-  });
-  
-  
+});
+
+
+
+
 
 
 

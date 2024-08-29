@@ -13,7 +13,7 @@ import { AdminAddProductComponent } from './components/admin-add-product/admin-a
 import { AdminEditProductComponent } from './components/admin-edit-product/admin-edit-product.component';
 import { CartComponent } from './components/cart/cart.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
-import { NewCheckoutComponent } from './components/new-checkout/new-checkout.component';
+
 
 export const routes: Routes = [
   { path: '', redirectTo: 'signup', pathMatch: 'full' },
@@ -21,8 +21,8 @@ export const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'products', component: ProductsComponent, canActivate: [AuthGuard] },
+  { path: 'checkout', component: CheckoutComponent, canActivate: [AuthGuard] },
   { path: 'cart', component: CartComponent, canActivate: [AuthGuard] },
-  { path: 'checkout', component: NewCheckoutComponent, canActivate: [AuthGuard] },
   { path: 'aboutus', component: AboutusComponent, canActivate: [AuthGuard] },
   {path: 'admin',component:AdminloginComponent},
 { path: 'admin/login', component: AdminloginComponent },
