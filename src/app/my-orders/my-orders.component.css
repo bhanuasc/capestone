@@ -1,0 +1,14 @@
+.error {
+    color: red;
+    font-weight: bold;
+  }
+  
+  img {
+    max-width: 100px;
+    height: auto;
+  }
+  
+  h2, h3 {
+    margin: 10px 0;
+  }
+  

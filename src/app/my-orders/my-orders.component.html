@@ -1,0 +1,17 @@
+<div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+<div *ngIf="orders.length === 0 && !errorMessage">No orders found.</div>
+<div *ngFor="let order of orders">
+  <h2>Order ID: {{ order._id }}</h2>
+  <p>Total Amount: {{ order.totalAmount  }}</p>
+  <p>Address: {{ order.address }}</p>
+  <p>Payment Method: {{ order.paymentMethod }}</p>
+
+  <div *ngFor="let item of order.cartProducts">
+    <div *ngIf="item.productId">
+      <h3>{{ item.productId.name }}</h3>
+      <img [src]="item.productId.imageUrl" alt="{{ item.productId.name }}" />
+      <p>Quantity: {{ item.quantity }}</p>
+      <p>Price: {{ item.productId.price  }}</p>
+    </div>
+  </div>
+</div>

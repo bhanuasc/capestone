@@ -281,6 +281,25 @@ app.post('/api/checkout', async (req, res) => {
     }
 });
 
+// Retrieve Orders for a User
+// Add this to your existing server.js file
+
+// Fetch Orders Route
+app.get('/api/orders', authenticateToken, async (req, res) => {
+    try {
+        const userId = req.user.userId;
+        // Fetch orders for the authenticated user
+        const orders = await Order.find({ 'cartProducts.productId.userId': userId })
+            .populate('cartProducts.productId'); // Populate product details
+        res.status(200).json(orders);
+    } catch (error) {
+        console.error('Error fetching orders:', error);
+        res.status(500).json({ error: 'Server error', details: error.message });
+    }
+});
+
+
+
 
 
 
