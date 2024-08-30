@@ -55,10 +55,16 @@ const authenticateToken = (req, res, next) => {
 
     jwt.verify(token, JWT_SECRET, (err, user) => {
         if (err) return res.sendStatus(403); // If token is invalid
-        req.user = user;
+        console.log('Decoded User:', user); // Debug line
+        req.user = user; // Ensure `user` object is attached to `req`
         next();
     });
 };
+
+
+
+
+
 
 // Routes
 // Signup Route
@@ -91,6 +97,7 @@ app.get('/api/user', authenticateToken, async (req, res) => {
 
 
 // Login Route
+// Login Route
 app.post('/api/login', async (req, res) => {
     try {
         const { email, password } = req.body;
@@ -102,13 +109,17 @@ app.post('/api/login', async (req, res) => {
         if (!match) {
             return res.status(401).send({ error: 'Invalid password' });
         }
-        const token = jwt.sign({ userId: user._id }, JWT_SECRET, { expiresIn: '1h' });
+        // Include email in the token
+        const token = jwt.sign({ userId: user._id, email: user.email }, JWT_SECRET, {
+            expiresIn: '1h' // Token expiry time
+        });
         res.status(200).send({ token });
     } catch (error) {
         console.error('Error logging in:', error);
         res.status(500).send({ error: 'Server error', details: error.message });
     }
 });
+
 
 // Add Product Route
 app.post('/api/products', async (req, res) => {
@@ -281,23 +292,44 @@ app.post('/api/checkout', async (req, res) => {
     }
 });
 
-// Retrieve Orders for a User
-// Add this to your existing server.js file
+app.get('/api/orders/email', authenticateToken, async (req, res) => {
+    const userEmail = req.user.email;
 
-// Fetch Orders Route
-app.get('/api/orders', authenticateToken, async (req, res) => {
+    if (!userEmail) {
+        return res.status(400).send({ error: 'Email not found in token' });
+    }
+
     try {
-        const userId = req.user.userId;
-        // Fetch orders for the authenticated user
-        const orders = await Order.find({ 'cartProducts.productId.userId': userId })
-            .populate('cartProducts.productId'); // Populate product details
+        const orders = await Order.find({ email: userEmail })
+            .populate({
+                path: 'cartProducts.productId',
+                select: 'name price imageUrl'
+            })
+            .exec();
+
+        if (!orders || orders.length === 0) {
+            return res.status(404).send({ message: 'No orders found for this user' });
+        }
+
         res.status(200).json(orders);
     } catch (error) {
-        console.error('Error fetching orders:', error);
-        res.status(500).json({ error: 'Server error', details: error.message });
+        console.error('Error retrieving orders:', error);
+        res.status(500).send({ error: 'Server error', details: error.message });
     }
 });
 
+app.get('/api/admin/orders', authenticateToken, async (req, res) => {
+    try {
+        // Fetch all orders with populated product details
+        const orders = await Order.find()
+          .populate('cartProducts.productId') // Populating the productId field
+          .exec();
+        res.json(orders);
+    } catch (error) {
+        console.error('Error fetching orders:', error);
+        res.status(500).json({ message: 'Failed to fetch orders.' });
+    }
+});
 
 
 

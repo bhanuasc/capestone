@@ -1,17 +1,28 @@
-<div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
-<div *ngIf="orders.length === 0 && !errorMessage">No orders found.</div>
-<div *ngFor="let order of orders">
-  <h2>Order ID: {{ order._id }}</h2>
-  <p>Total Amount: {{ order.totalAmount  }}</p>
-  <p>Address: {{ order.address }}</p>
-  <p>Payment Method: {{ order.paymentMethod }}</p>
-
-  <div *ngFor="let item of order.cartProducts">
-    <div *ngIf="item.productId">
-      <h3>{{ item.productId.name }}</h3>
-      <img [src]="item.productId.imageUrl" alt="{{ item.productId.name }}" />
-      <p>Quantity: {{ item.quantity }}</p>
-      <p>Price: {{ item.productId.price  }}</p>
+<div class="orders-container" *ngIf="orders.length > 0; else noOrders">
+    <h2>Your Orders</h2>
+    <div *ngFor="let order of orders" class="order-card">
+      <p><strong>Order Date:</strong> {{ order.createdAt | date }}</p>
+      <p><strong>Total Amount:</strong> ${{ order.totalAmount }}</p>
+      <p><strong>Shipping Cost:</strong> ${{ order.shippingCost }}</p>
+      <p><strong>Payment Method:</strong> {{ order.paymentMethod }}</p>
+      <h3>Products:</h3>
+      <ul class="products-list">
+        <li *ngFor="let item of order.cartProducts">
+          <div *ngIf="item.productId">
+            <img [src]="item.productId.imageUrl" alt="{{ item.productId.name }}" class="product-image" />
+            <p><strong>{{ item.productId.name }}</strong></p>
+            <p>Quantity: {{ item.quantity }}</p>
+            <p>Price: ${{ item.productId.price }}</p>
+          </div>
+          <div *ngIf="!item.productId">
+            <p>Product details not available</p>
+          </div>
+        </li>
+      </ul>
     </div>
   </div>
-</div>
+  
+  <ng-template #noOrders>
+    <p>You have no orders.</p>
+  </ng-template>
+  

@@ -15,7 +15,6 @@ import { CartComponent } from './components/cart/cart.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
 
-
 export const routes: Routes = [
   { path: '', redirectTo: 'signup', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
@@ -39,6 +38,7 @@ export const routes: Routes = [
       { path: '', redirectTo: 'edit', pathMatch: 'full' }, // Redirect to a default sub-route
       { path: 'add', component: AdminAddProductComponent },
       { path: 'edit', component: AdminEditProductComponent }
+
     ]
   },
 ];

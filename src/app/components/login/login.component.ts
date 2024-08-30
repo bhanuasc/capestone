@@ -1,44 +1,32 @@
 import { Component } from '@angular/core';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AuthService } from '../../auth.service';
-import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
-interface LoginResponse {
-  token: string;
-}
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, CommonModule, HttpClientModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
   email: string = '';
   password: string = '';
-  user = { email: '', password: '' };
   message: string | null = null;
   messageType: 'success' | 'error' | null = null;
   fadeOut = false;
 
-  constructor(private http: HttpClient, private router: Router, private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
- // In LoginComponent
-onSubmit() {
-  this.http.post<LoginResponse>('http://localhost:3000/api/login', this.user)
-    .subscribe(
-      response => {
-        console.log('Storing email:', this.email); // Debug line
-        localStorage.setItem('email', this.email); // Store email
-        localStorage.setItem('authToken', response.token); // Store token
-        this.authService.login(this.email, response.token);
-
-        setTimeout(() => {
-          this.router.navigate(['/home']);
-        }, 3000);
+  onSubmit(): void {
+    this.authService.login(this.email, this.password).subscribe(
+      () => {
+        localStorage.setItem('email', this.email);
+        console.log('Email stored in localStorage:', localStorage.getItem('email'));
+        
+        // Login is handled within AuthService and navigation happens there
       },
       error => {
         if (error.error === 'Invalid email or password') {
@@ -48,8 +36,7 @@ onSubmit() {
         }
       }
     );
-}
-
+  }
 
   showMessage(message: string, type: 'success' | 'error'): void {
     this.message = message;

@@ -4,6 +4,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
 import { ProductsComponent } from './components/products/products.component';
 import { AboutusComponent } from './components/aboutus/aboutus.component';
+import { HttpClientModule, provideHttpClient } from '@angular/common/http';
 
 
 
@@ -11,7 +12,7 @@ import { AboutusComponent } from './components/aboutus/aboutus.component';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NavbarComponent,RouterModule,HomeComponent, ProductsComponent,AboutusComponent],
+  imports: [RouterOutlet, NavbarComponent,RouterModule,HomeComponent, ProductsComponent,AboutusComponent,HttpClientModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
