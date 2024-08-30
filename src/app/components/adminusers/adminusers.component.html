@@ -1,22 +1,12 @@
-<div *ngIf="users.length > 0">
+<div *ngIf="users.length > 0" class="users-container">
   <h2>Registered Users</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>Username</th>
-        <th>Email</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let user of users">
-        <td>{{ user.username }}</td>
-        <td>{{ user.email }}</td>
-        
-      </tr>
-    </tbody>
-  </table>
+  <div class="cards-container">
+    <div *ngFor="let user of users" class="user-card">
+      <h3>{{ user.username }}</h3>
+      <p>Email: {{ user.email }}</p>
+    </div>
+  </div>
 </div>
 <div *ngIf="users.length === 0">
   <p>No registered users found.</p>
 </div>
-

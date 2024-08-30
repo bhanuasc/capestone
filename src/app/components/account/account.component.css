@@ -1,0 +1,24 @@
+.card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+    padding: 20px;
+    max-width: 400px;
+  }
+  
+  .card-header {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+  }
+  
+  .card-body {
+    font-size: 1.2em;
+  }
+  
+  .user-detail {
+    margin-bottom: 10px;
+  }
+  

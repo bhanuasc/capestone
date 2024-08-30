@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [CommonModule, HttpClientModule,FormsModule],
+  imports: [CommonModule, HttpClientModule, FormsModule],
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']
 })
@@ -20,7 +20,6 @@ export class ProductsComponent implements OnInit {
   selectedPriceRange: string = '';
   selectedCategory: string = '';
   fadeOut = false; // New property to control the fade-out effect
-
 
   constructor(private http: HttpClient) {}
 
@@ -49,12 +48,25 @@ export class ProductsComponent implements OnInit {
   }
 
   addToCart(product: any): void {
+    // Check stock availability
+    if (product.quantity == 0) {
+      this.showAlert('Product is out of stock', 'error');
+      return;
+    }
+
+    // Check if the product is already in the cart
     const existingProduct = this.cart.find(p => p._id === product._id);
+
     if (existingProduct) {
       this.showAlert('Product already in cart', 'error');
     } else {
+      // Add product to the cart
       this.cart.push(product);
+
+      // Update localStorage
       localStorage.setItem('cart', JSON.stringify(this.cart));
+
+      // Show success alert
       this.showAlert('Product added to cart', 'success');
     }
   }
@@ -63,20 +75,18 @@ export class ProductsComponent implements OnInit {
     this.alertMessage = message;
     this.alertType = type;
     this.fadeOut = false; // Reset fadeOut before showing alert
-  
+
     // Ensure the element exists and use type assertion
     const alertElement = document.querySelector('.alert') as HTMLElement;
     if (alertElement) {
       // Force reflow to apply styles before starting transition
       void alertElement.offsetWidth;
-  
+
       setTimeout(() => {
         this.fadeOut = true; // Start fading out after 3 seconds
       }, 3000); // Time before starting to fade out
     }
   }
-  
-  
 
   toggleFilterMenu(): void {
     this.filterMenuVisible = !this.filterMenuVisible;

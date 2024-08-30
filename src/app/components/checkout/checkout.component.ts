@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-checkout',
   standalone: true,
-  imports: [CommonModule, HttpClientModule, FormsModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './checkout.component.html',
   styleUrls: ['./checkout.component.css']
 })
@@ -22,7 +23,7 @@ export class CheckoutComponent implements OnInit {
   alertType: 'success' | 'error' | null = null;
   alertVisible: boolean = false;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   ngOnInit(): void {
     this.loadCart();
@@ -57,9 +58,10 @@ export class CheckoutComponent implements OnInit {
   checkout(): void {
     const requestData = {
       cartProducts: this.cartProducts.map(product => ({
-        name: product.name,            // Product name
-        price: product.price,          // Product price
-        quantity: product.quantity     // Product quantity
+        productId: product._id, // Changed _id to productId to match server-side code
+        name: product.name,
+        price: product.price,
+        quantity: product.quantity || 1
       })),
       totalAmount: this.totalAmount || 0,
       email: this.email || '',
@@ -69,10 +71,14 @@ export class CheckoutComponent implements OnInit {
       upiId: this.upiId || ''
     };
 
+    console.log('Sending request data:', requestData); // Log request data for debugging
+
     this.http.post('http://localhost:3000/api/checkout', requestData)
       .subscribe(
         response => {
           this.showAlert('Order placed successfully!', 'success');
+          this.clearCart(); // Clear the cart after successful checkout
+          this.router.navigate(['/order-success']); // Redirect to a success page or dashboard
         },
         error => {
           console.error('Error placing order:', error);
@@ -91,5 +97,10 @@ export class CheckoutComponent implements OnInit {
       this.alertType = null;
       this.alertVisible = false;
     }, 3000);
+  }
+
+  clearCart(): void {
+    localStorage.removeItem('cart'); // Remove cart from local storage
+    this.cartProducts = []; // Clear the cartProducts array
   }
 }

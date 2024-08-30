@@ -30,6 +30,9 @@
         <li class="nav-item" *ngIf="authService.isLoggedIn() && !authService.isAdminLoggedIn()">
             <a routerLink="/myorders" routerLinkActive="active">My-Orders</a>
         </li>
+        <li class="nav-item" *ngIf="authService.isLoggedIn() && !authService.isAdminLoggedIn()">
+            <a routerLink="/account" routerLinkActive="active">Account</a>
+        </li>
        
         <li class="nav-item" *ngIf="authService.isLoggedIn() && !authService.isAdminLoggedIn()">
             <a (click)="onLogout()" style="cursor: pointer;">Logout</a>

@@ -37,6 +37,7 @@ const User = mongoose.model('User', new mongoose.Schema({
 const Product = mongoose.model('Product', new mongoose.Schema({
     name: { type: String, required: true },
     price: { type: Number, required: true },
+    quantity: { type: Number, required: true },
     imageUrl: { type: String, required: false },
     description: { type: String, required: true },
     category: {
@@ -81,20 +82,17 @@ app.post('/api/signup', async (req, res) => {
     }
 });
 // In your server file (e.g., server.js)
-app.get('/api/user', authenticateToken, async (req, res) => {
-  try {
-    const userId = req.user.userId;
-    const user = await User.findById(userId);
-    if (!user) {
-      return res.status(404).send({ error: 'User not found' });
+// Get All Users Route
+app.get('/api/users', async (req, res) => {
+    try {
+      const users = await User.find({}, 'username email'); // Fetch only username and email
+      res.status(200).json(users);
+    } catch (error) {
+      console.error('Error fetching users:', error);
+      res.status(500).json({ error: 'Failed to fetch users' });
     }
-    res.status(200).send({ email: user.email });
-  } catch (error) {
-    console.error('Error fetching user details:', error);
-    res.status(500).send({ error: 'Server error', details: error.message });
-  }
-});
-
+  });
+  
 
 // Login Route
 // Login Route
@@ -124,11 +122,11 @@ app.post('/api/login', async (req, res) => {
 // Add Product Route
 app.post('/api/products', async (req, res) => {
     try {
-        const { name, price, imageUrl, description, category } = req.body;
+        const { name, price, imageUrl, description,quantity, category } = req.body;
         if (!['laptop', 'mobile', 'electronics'].includes(category)) {
             return res.status(400).send({ error: 'Invalid category' });
         }
-        const product = new Product({ name, price, imageUrl, description, category });
+        const product = new Product({ name, price, imageUrl, description,quantity, category });
         const savedProduct = await product.save();
         res.status(201).send(savedProduct);
     } catch (error) {
@@ -152,11 +150,11 @@ app.get('/api/products', async (req, res) => {
 app.put('/api/products/:id', async (req, res) => {
     try {
         const { id } = req.params;
-        const { name, price, imageUrl, description, category } = req.body;
+        const { name, price, imageUrl, description,quantity, category } = req.body;
         if (!['laptop', 'mobile', 'electronics'].includes(category)) {
             return res.status(400).send({ error: 'Invalid category' });
         }
-        const updatedProduct = await Product.findByIdAndUpdate(id, { name, price, imageUrl, description, category }, { new: true });
+        const updatedProduct = await Product.findByIdAndUpdate(id, { name, price, imageUrl, description,quantity, category }, { new: true });
         if (!updatedProduct) {
             return res.status(404).send({ error: 'Product not found' });
         }
@@ -237,6 +235,7 @@ app.delete('/api/cart/:productId', authenticateToken, async (req, res) => {
         res.status(500).send({ error: 'Server error', details: error.message });
     }
 });
+
 const orderSchema = new mongoose.Schema({
     cartProducts: [
       {
@@ -283,7 +282,22 @@ const orderSchema = new mongoose.Schema({
   
       // Save the order to the database
       const savedOrder = await newOrder.save();
-      
+  
+      // Update product quantities
+      for (const item of cartProducts) {
+        const product = await Product.findById(item.productId); // Use the correct field name
+        if (product) {
+          console.log(`Updating product: ${product._id}`); // Log product ID for debugging
+          product.quantity -= item.quantity; // Decrease stock by ordered quantity
+          if (product.quantity < 0) product.quantity = 0; // Prevent negative stock
+          await product.save();
+          console.log(`Updated quantity for product ${product._id}: ${product.quantity}`); // Log updated quantity
+        } else {
+          console.error(`Product not found: ${item.productId}`); // Log if product not found
+        }
+      }
+  
+      // Respond with the saved order
       res.status(201).json(savedOrder);
     } catch (error) {
       console.error('Error placing order:', error);
@@ -291,7 +305,9 @@ const orderSchema = new mongoose.Schema({
     }
   });
   
-
+  
+  
+  
   app.get('/api/orders/email', async (req, res) => {
     try {
       // Assuming you have user authentication and session or token to fetch orders based on email
@@ -307,8 +323,31 @@ const orderSchema = new mongoose.Schema({
     }
   });
 
-
-
+// Server.js or your route handler file
+app.get('/api/user', async (req, res) => {
+    try {
+      const { email } = req.query;  // Read email from query parameters
+  
+      // Find the user by email
+      const user = await User.findOne({ email });
+      if (!user) {
+        return res.status(404).send({ error: 'User not found' });
+      }
+  
+      res.status(200).send({
+        username: user.username,
+        email: user.email
+      });
+    } catch (error) {
+      console.error('Error fetching user details:', error);
+      res.status(500).send({ error: 'Server error', details: error.message });
+    }
+  });
+  
+  
+  
+  
+  
 
 
 // Start Server

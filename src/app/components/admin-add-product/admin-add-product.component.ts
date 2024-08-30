@@ -15,6 +15,7 @@ export class AdminAddProductComponent {
     name: '',
     price: 0,
     description: '',
+    quantity:'',
     category: '',
     imageUrl: ''  // Added imageUrl field
   };
@@ -57,6 +58,7 @@ export class AdminAddProductComponent {
       name: '',
       price: 0,
       description: '',
+      quantity:'',
       category: '',
       imageUrl: ''  // Reset imageUrl field
     };

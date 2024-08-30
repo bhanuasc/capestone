@@ -7,6 +7,15 @@
   gap: 15px; /* Space between cards */
 }
 
+.btn:disabled,
+.btn[disabled] {
+  background-color: #6c757d; /* Grey background for disabled state */
+  color: #ffffff; /* White text color */
+  border-color: #6c757d; /* Grey border */
+  cursor: not-allowed; /* Indicate that the button is not clickable */
+  opacity: 0.65; /* Slightly faded effect */
+}
+
 .product-card {
   border: 1px solid #ddd;
   border-radius: 5px;

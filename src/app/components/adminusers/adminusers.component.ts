@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-adminusers',
   standalone: true,
-  imports: [HttpClientModule,CommonModule], // Import HttpClientModule directly in the component
+  imports: [HttpClientModule, CommonModule], // Import HttpClientModule directly in the component
   templateUrl: './adminusers.component.html',
   styleUrls: ['./adminusers.component.css']
 })

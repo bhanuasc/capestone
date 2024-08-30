@@ -28,7 +28,13 @@
     <p>Price: ${{ product.price }}</p>
     <p>Category: {{ product.category }}</p>
     <p class="description">Description: {{ product.description }}</p>
-    <button (click)="addToCart(product)" class="btn">Add to Cart</button>
+    <p *ngIf="product.stock === 0" class="out-of-stock">Out of Stock</p>
+    <button 
+      (click)="addToCart(product)" 
+      class="btn" 
+      [disabled]="product.quantity === 0">
+      Add to Cart
+    </button>
   </div>
 </div>
 
@@ -41,4 +47,3 @@
      }">
   {{ alertMessage }}
 </div>
-

@@ -15,7 +15,8 @@
       <div *ngIf="!product.editing">
         <h3>{{ product.name }}</h3>
         <p> <img [src]="product.imageUrl" alt="{{ product.name }}" width="100"></p>
-        <p>Price: ${{ product.price }}</p>
+        <p>Price: {{ product.price }}/-</p>
+        <p>Stock No: {{ product.quantity }}</p>
         <p>Description: {{ product.description }}</p>
         <p>Category: {{ product.category }}</p>
         
@@ -25,6 +26,7 @@
       <div *ngIf="product.editing">
         <input [(ngModel)]="product.name" placeholder="Name" />
         <input [(ngModel)]="product.price" type="number" placeholder="Price" />
+        <input [(ngModel)]="product.quantity" type="number" placeholder="Quantity" />
         <textarea [(ngModel)]="product.description" placeholder="Description"></textarea>
         <select [(ngModel)]="product.category">
           <option value="laptop">Laptop</option>

@@ -86,6 +86,6 @@ export class CartComponent implements OnInit {
   }
 
   checkout(): void {
-alert("placed succesfully")
-}
+    this.router.navigate(['/checkout']);
+  }
 }
