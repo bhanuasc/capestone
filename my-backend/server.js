@@ -237,7 +237,6 @@ app.delete('/api/cart/:productId', authenticateToken, async (req, res) => {
         res.status(500).send({ error: 'Server error', details: error.message });
     }
 });
-// Define the Order schema if not already defined
 const orderSchema = new mongoose.Schema({
     cartProducts: [
       {
@@ -258,6 +257,7 @@ const orderSchema = new mongoose.Schema({
     upiId: String,
     createdAt: { type: Date, default: Date.now }
   });
+  
   
   const Order = mongoose.model('Order', orderSchema);
   
@@ -294,22 +294,12 @@ const orderSchema = new mongoose.Schema({
 
   app.get('/api/orders/email', async (req, res) => {
     try {
-      // For simplicity, assuming email is passed in query params
-      const email = req.query.email;
-  
-      if (!email) {
-        return res.status(400).json({ error: 'Email query parameter is required' });
-      }
+      // Assuming you have user authentication and session or token to fetch orders based on email
+      const email = req.query.email; // Retrieve email from query params
   
       // Fetch orders and populate product details
-      const orders = await Order.find({ email: email })
-        .populate('cartProducts.productId') // Ensure product details are populated
-        .exec();
-  
-      if (orders.length === 0) {
-        return res.status(404).json({ message: 'No orders found' });
-      }
-  
+      const orders = await Order.find({ email: email }).exec();
+      
       res.status(200).json(orders);
     } catch (error) {
       console.error('Error fetching orders:', error);
