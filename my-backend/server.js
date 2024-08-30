@@ -237,105 +237,85 @@ app.delete('/api/cart/:productId', authenticateToken, async (req, res) => {
         res.status(500).send({ error: 'Server error', details: error.message });
     }
 });
-
-const Order = mongoose.model('Order', new mongoose.Schema({
-    email: { type: String, required: false }, // No longer required
-    cartProducts: [{  // Assuming this structure for cart products
-        productId: { type: mongoose.Schema.Types.ObjectId, ref: 'Product', required: false }, // No longer required
-        quantity: { type: Number, required: false } // No longer required
-    }],
-    totalAmount: { type: Number, required: false, default: 0 }, // Default to 0
-    address: { type: String, required: false, default: '' }, // Default to empty string
-    paymentMethod: { type: String, required: false, default: '' }, // Default to empty string
+// Define the Order schema if not already defined
+const orderSchema = new mongoose.Schema({
+    cartProducts: [
+      {
+        name: String,
+        price: Number,
+        quantity: Number
+      }
+    ],
+    totalAmount: Number,
+    email: String,
+    address: String,
+    paymentMethod: String,
     cardDetails: {
-        cardNumber: { type: String, required: false, default: '' }, // Default to empty string
-        cardExpiry: { type: String, required: false, default: '' }, // Default to empty string
-        cardCVV: { type: String, required: false, default: '' } // Default to empty string
+      cardNumber: String,
+      cardExpiry: String,
+      cardCVV: String
     },
-    upiId: { type: String, required: false, default: '' } // Default to empty string
-}, { timestamps: true }));
-
-
-
-// Save Checkout Details
-// Checkout Route
-// Checkout Route
-app.post('/api/checkout', async (req, res) => {
+    upiId: String,
+    createdAt: { type: Date, default: Date.now }
+  });
+  
+  const Order = mongoose.model('Order', orderSchema);
+  
+  app.post('/api/checkout', async (req, res) => {
     try {
-        const { cartProducts, totalAmount, email, address, paymentMethod, cardDetails, upiId } = req.body;
-
-        // Ensure cartProducts is provided
-        if (!cartProducts || cartProducts.length === 0) {
-            return res.status(400).send({ error: 'No products in cart' });
-        }
-
-        // Create an order with provided fields or default values
-        const order = {
-            cartProducts,
-            totalAmount: totalAmount || 0,  // Default to 0 if not provided
-            email: email || '',             // Default to empty string if not provided
-            address: address || '',         // Default to empty string if not provided
-            paymentMethod: paymentMethod || '', // Default to empty string if not provided
-            cardDetails: cardDetails || {}, // Default to empty object if not provided
-            upiId: upiId || '',             // Default to empty string if not provided
-            createdAt: new Date()
-        };
-
-        // Save order to the database
-        const newOrder = new Order(order);
-        await newOrder.save();
-
-        res.status(201).send(newOrder);
+      const { cartProducts, totalAmount, email, address, paymentMethod, cardDetails, upiId } = req.body;
+  
+      // Validate the request data
+      if (!cartProducts || !totalAmount || !email || !address || !paymentMethod) {
+        return res.status(400).json({ error: 'Missing required fields' });
+      }
+  
+      // Create a new order
+      const newOrder = new Order({
+        cartProducts,
+        totalAmount,
+        email,
+        address,
+        paymentMethod,
+        cardDetails,
+        upiId
+      });
+  
+      // Save the order to the database
+      const savedOrder = await newOrder.save();
+      
+      res.status(201).json(savedOrder);
     } catch (error) {
-        console.error('Error placing order:', error);
-        res.status(500).send({ error: 'Server error', details: error.message });
+      console.error('Error placing order:', error);
+      res.status(500).json({ error: 'Failed to place order' });
     }
-});
+  });
+  
 
-app.get('/api/orders/email', authenticateToken, async (req, res) => {
-    const userEmail = req.user.email;
-
-    if (!userEmail) {
-        return res.status(400).send({ error: 'Email not found in token' });
-    }
-
+  app.get('/api/orders/email', async (req, res) => {
     try {
-        const orders = await Order.find({ email: userEmail })
-            .populate({
-                path: 'cartProducts.productId',
-                select: 'name price imageUrl'
-            })
-            .exec();
-
-        if (!orders || orders.length === 0) {
-            return res.status(404).send({ message: 'No orders found for this user' });
-        }
-
-        res.status(200).json(orders);
+      // For simplicity, assuming email is passed in query params
+      const email = req.query.email;
+  
+      if (!email) {
+        return res.status(400).json({ error: 'Email query parameter is required' });
+      }
+  
+      // Fetch orders and populate product details
+      const orders = await Order.find({ email: email })
+        .populate('cartProducts.productId') // Ensure product details are populated
+        .exec();
+  
+      if (orders.length === 0) {
+        return res.status(404).json({ message: 'No orders found' });
+      }
+  
+      res.status(200).json(orders);
     } catch (error) {
-        console.error('Error retrieving orders:', error);
-        res.status(500).send({ error: 'Server error', details: error.message });
+      console.error('Error fetching orders:', error);
+      res.status(500).json({ error: 'Failed to fetch orders' });
     }
-});
-
-app.get('/api/admin/orders', authenticateToken, async (req, res) => {
-    try {
-        // Fetch all orders with populated product details
-        const orders = await Order.find()
-          .populate('cartProducts.productId') // Populating the productId field
-          .exec();
-        res.json(orders);
-    } catch (error) {
-        console.error('Error fetching orders:', error);
-        res.status(500).json({ message: 'Failed to fetch orders.' });
-    }
-});
-
-
-
-
-
-
+  });
 
 
 

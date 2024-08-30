@@ -43,14 +43,12 @@ export class CheckoutComponent implements OnInit {
 
   loadUserEmail(): void {
     const email = localStorage.getItem('email');
-    console.log('Retrieved email from localStorage:', email); // Debug line
     if (email) {
       this.email = email;
     } else {
       console.error('No email found in localStorage');
     }
   }
-  
 
   onPaymentMethodChange(method: string): void {
     this.paymentMethod = method;
@@ -59,8 +57,9 @@ export class CheckoutComponent implements OnInit {
   checkout(): void {
     const requestData = {
       cartProducts: this.cartProducts.map(product => ({
-        productId: product.productId,
-        quantity: product.quantity
+        name: product.name,            // Product name
+        price: product.price,          // Product price
+        quantity: product.quantity     // Product quantity
       })),
       totalAmount: this.totalAmount || 0,
       email: this.email || '',
@@ -70,17 +69,13 @@ export class CheckoutComponent implements OnInit {
       upiId: this.upiId || ''
     };
 
-    console.log('Sending request with data:', requestData);
-
     this.http.post('http://localhost:3000/api/checkout', requestData)
       .subscribe(
         response => {
-          console.log('Order placed successfully:', response);
           this.showAlert('Order placed successfully!', 'success');
         },
         error => {
           console.error('Error placing order:', error);
-          console.log('Error details:', error.error);
           this.showAlert('Error placing order. Please try again.', 'error');
         }
       );

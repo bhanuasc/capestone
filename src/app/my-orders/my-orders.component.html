@@ -1,28 +1,26 @@
 <div class="orders-container" *ngIf="orders.length > 0; else noOrders">
-    <h2>Your Orders</h2>
-    <div *ngFor="let order of orders" class="order-card">
-      <p><strong>Order Date:</strong> {{ order.createdAt | date }}</p>
-      <p><strong>Total Amount:</strong> ${{ order.totalAmount }}</p>
-      <p><strong>Shipping Cost:</strong> ${{ order.shippingCost }}</p>
-      <p><strong>Payment Method:</strong> {{ order.paymentMethod }}</p>
-      <h3>Products:</h3>
-      <ul class="products-list">
-        <li *ngFor="let item of order.cartProducts">
-          <div *ngIf="item.productId">
-            <img [src]="item.productId.imageUrl" alt="{{ item.productId.name }}" class="product-image" />
-            <p><strong>{{ item.productId.name }}</strong></p>
-            <p>Quantity: {{ item.quantity }}</p>
-            <p>Price: ${{ item.productId.price }}</p>
-          </div>
-          <div *ngIf="!item.productId">
-            <p>Product details not available</p>
-          </div>
-        </li>
-      </ul>
-    </div>
+  <h2>Your Orders</h2>
+  <div *ngFor="let order of orders" class="order-card">
+    <p><strong>Order Date:</strong> {{ order.createdAt | date }}</p>
+    <p><strong>Total Amount:</strong> ${{ order.totalAmount }}</p>
+    <p><strong>Shipping Cost:</strong> ${{ order.shippingCost }}</p>
+    <p><strong>Payment Method:</strong> {{ order.paymentMethod }}</p>
+    <h3>Products:</h3>
+    <ul class="products-list">
+      <li *ngFor="let item of order.cartProducts">
+        <div *ngIf="item.name">
+          <p><strong>{{ item.name }}</strong></p>
+          <p>Quantity: {{ item.quantity }}</p>
+          <p>Price: ${{ item.price }}</p>
+        </div>
+        <div *ngIf="!item.name">
+          <p>Product details not available</p>
+        </div>
+      </li>
+    </ul>
   </div>
-  
-  <ng-template #noOrders>
-    <p>You have no orders.</p>
-  </ng-template>
-  
+</div>
+
+<ng-template #noOrders>
+  <p>You have no orders.</p>
+</ng-template>
