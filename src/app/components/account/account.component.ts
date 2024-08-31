@@ -1,19 +1,22 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { MyOrdersComponent } from "../../my-orders/my-orders.component";
 
 @Component({
   selector: 'app-account',
   standalone: true,
-  imports: [HttpClientModule, CommonModule],
+  imports: [HttpClientModule, CommonModule, MyOrdersComponent],
   templateUrl: './account.component.html',
   styleUrls: ['./account.component.css']
 })
 export class AccountComponent implements OnInit {
-  user: any = {};
+  showOrders = false; // Flag to toggle My Orders section
+
+  // Error and success message properties
   errorMessage: string | null = null;
   successMessage: string | null = null;
-
+  user: any = {};
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {

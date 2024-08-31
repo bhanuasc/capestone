@@ -1,3 +1,4 @@
+<br><br>
 <div *ngIf="alertVisible" class="alert" [ngClass]="{'alert-success': alertType === 'success', 'alert-error': alertType === 'error'}">
   {{ alertMessage }}
 </div>
@@ -10,7 +11,7 @@
       <div class="item-info">
         <h4>{{ product.name }}</h4>
         <p>{{ product.description }}</p>
-        <p>Price: ${{ product.price.toFixed(2) }}</p>
+        <p>Price: {{ product.price.toFixed(2) }}/-</p>
         <p>Quantity: 
           <span class="quantity-controls">
             <button (click)="decreaseQuantity(product)">-</button>
@@ -32,7 +33,7 @@
   <div class="checkout-summary">
     <h3>Summary</h3>
     <p>Total Quantity: {{ totalQuantity }}</p>
-    <p>Total Amount: ${{ totalAmount.toFixed(2) }}</p>
+    <p>Total Amount: {{ totalAmount.toFixed(2) }}/-</p>
     <button (click)="checkout()">Checkout</button>
   </div>
 </div>

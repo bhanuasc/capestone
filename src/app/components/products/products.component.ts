@@ -20,6 +20,7 @@ export class ProductsComponent implements OnInit {
   selectedPriceRange: string = '';
   selectedCategory: string = '';
   fadeOut = false; // New property to control the fade-out effect
+  
 
   constructor(private http: HttpClient) {}
 
@@ -95,10 +96,6 @@ export class ProductsComponent implements OnInit {
   applyFilters(): void {
     let filtered = this.products;
 
-    if (this.selectedPriceRange) {
-      const [minPrice, maxPrice] = this.selectedPriceRange.split('-').map(v => v === '200+' ? Infinity : parseFloat(v));
-      filtered = filtered.filter(product => product.price >= minPrice && product.price <= maxPrice);
-    }
 
     if (this.selectedCategory) {
       filtered = filtered.filter(product => product.category === this.selectedCategory);

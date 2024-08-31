@@ -241,7 +241,7 @@ const orderSchema = new mongoose.Schema({
       {
         name: String,
         price: Number,
-        quantity: Number
+        quantity: { type: Number, default: 1 } // Set default value to 1 if needed
       }
     ],
     totalAmount: Number,
@@ -254,15 +254,15 @@ const orderSchema = new mongoose.Schema({
       cardCVV: String
     },
     upiId: String,
+    dMode: { type: String, required: true },
     createdAt: { type: Date, default: Date.now }
   });
-  
   
   const Order = mongoose.model('Order', orderSchema);
   
   app.post('/api/checkout', async (req, res) => {
     try {
-      const { cartProducts, totalAmount, email, address, paymentMethod, cardDetails, upiId } = req.body;
+      const { cartProducts, totalAmount, email, address, paymentMethod,dMode, cardDetails, upiId } = req.body;
   
       // Validate the request data
       if (!cartProducts || !totalAmount || !email || !address || !paymentMethod) {
@@ -277,7 +277,8 @@ const orderSchema = new mongoose.Schema({
         address,
         paymentMethod,
         cardDetails,
-        upiId
+        upiId,
+        dMode
       });
   
       // Save the order to the database
@@ -285,15 +286,21 @@ const orderSchema = new mongoose.Schema({
   
       // Update product quantities
       for (const item of cartProducts) {
-        const product = await Product.findById(item.productId); // Use the correct field name
+        const product = await Product.findById(item.productId);
         if (product) {
-          console.log(`Updating product: ${product._id}`); // Log product ID for debugging
-          product.quantity -= item.quantity; // Decrease stock by ordered quantity
-          if (product.quantity < 0) product.quantity = 0; // Prevent negative stock
+          const quantity = Number(item.quantity);
+          if (isNaN(quantity)) {
+            console.error(`Invalid quantity value: ${item.quantity}`);
+            return res.status(400).json({ error: 'Invalid quantity value' });
+          }
+  
+          console.log(`Updating product: ${product._id}`);
+          product.quantity -= quantity;
+          if (product.quantity < 0) product.quantity = 0;
           await product.save();
-          console.log(`Updated quantity for product ${product._id}: ${product.quantity}`); // Log updated quantity
+          console.log(`Updated quantity for product ${product._id}: ${product.quantity}`);
         } else {
-          console.error(`Product not found: ${item.productId}`); // Log if product not found
+          console.error(`Product not found: ${item.productId}`);
         }
       }
   
@@ -304,7 +311,7 @@ const orderSchema = new mongoose.Schema({
       res.status(500).json({ error: 'Failed to place order' });
     }
   });
-  
+   
   
   
   

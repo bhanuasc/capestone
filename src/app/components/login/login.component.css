@@ -1,117 +1,79 @@
-/* Global Box-Sizing */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-/* Body Styling */
+/* General Styles */
 body {
-  padding-top: 70px; /* Adjusts for fixed navbar */
-  background-color: #f5f5f5; /* Light grey background for contrast */
-  color: #333333; /* Dark grey text for readability */
-  font-family: Arial, sans-serif; /* Default font */
-  margin: 0;
+  background-color: #f4f4f4; /* Light grey background for the page */
+  color: #0d5c50; /* Font color matching the theme */
 }
 
-/* Common alert box styling */
+/* Alert Box */
 .alert {
-  position: fixed;
-  right: 20px;
-  padding: 10px 20px;
+  padding: 15px;
+  margin-bottom: 20px;
   border-radius: 5px;
-  z-index: 1000;
-  transition: opacity 1s ease-out; /* 1-second fade-out effect */
+  font-size: 16px;
 }
 
-/* Success alert positioned below the navbar */
 .alert.success {
-  top: 20px; /* Adjust this value based on your navbar height */
-  background-color: #4caf50;
-  color: white;
+  background-color: #d4edda;
+  color: #155724;
 }
 
-/* Error alert positioned slightly below the success alert */
 .alert.error {
-  top: 70px; /* Adjust this value for spacing from the success alert */
-  background-color: #f44336;
-  color: white;
+  background-color: #f8d7da;
+  color: #721c24;
 }
 
-/* Fading out */
-.fade-out {
+.alert.fade-out {
   opacity: 0;
+  transition: opacity 1s ease-out;
 }
 
-
-  
 /* Login Container */
 .login-container {
   max-width: 400px;
-  margin: 20px auto; /* Center horizontally */
+  margin: 50px auto;
   padding: 20px;
-  border-radius: 5px;
-  background-color: #fff; /* White background for the form */
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Form Group */
+/* Form Styles */
 .form-group {
   margin-bottom: 15px;
 }
 
 .form-group label {
   display: block;
+  font-size: 16px;
   margin-bottom: 5px;
-  font-weight: bold;
-  color: #333; /* Dark grey text */
+  color: #0d5c50; /* Label color matching the theme */
 }
 
-.form-group input {
+.form-control {
   width: 100%;
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #ddd;
   border-radius: 5px;
   font-size: 16px;
-  transition: border-color 0.3s;
 }
 
-.form-group input:focus {
-  border-color: #555; /* Darker border on focus */
+.form-control:focus {
+  border-color: #0d5c50; /* Border color on focus matching the theme */
+  box-shadow: 0 0 5px rgba(13, 92, 80, 0.2); /* Subtle shadow on focus */
 }
 
-/* Button Styling */
-.btn {
-  padding: 10px 15px;
-  border: none;
-  border-radius: 5px;
-  color: #fff;
-  background-color: #414141; /* Default button color */
-  cursor: pointer;
-  font-size: 16px;
-  transition: background-color 0.3s, transform 0.3s;
-}
-
+/* Button Styles */
 .btn-primary {
-  background-color: #3b3b3b; /* Primary button color */
+  background-color: #0d5c50; /* Background color matching the theme */
+  border: none;
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .btn-primary:hover {
-  background-color: #585858; /* Darker color on hover */
-  transform: scale(1.05); /* Slight scale effect on hover */
-}
-
-/* Media Query for smaller screens */
-@media (max-width: 768px) {
-  .login-container {
-    padding: 15px;
-  }
-
-  .form-group input {
-    font-size: 14px;
-  }
-
-  .btn {
-    font-size: 14px;
-  }
+  background-color: #0b4c43; /* Slightly darker shade for hover effect */
 }

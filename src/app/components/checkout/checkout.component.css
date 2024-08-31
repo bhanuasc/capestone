@@ -1,17 +1,166 @@
+/* Global Styles (for Checkout) */
+
+/* Checkout Section */
+.checkout-section {
+  background-color: #ffffff; /* White background for the checkout section */
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 600px; /* Adjusted width for a narrower container */
+  width: 100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 20px auto; /* Center the container with margin */
+  margin-top: -30px;
+  min-height: 300px;
+}
+
+.checkout-section h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+/* Cart Summary as Card */
+.card {
+  background-color: #ffffff; /* White background for the card */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.cart-summary {
+  margin-bottom: 20px;
+}
+
+.cart-summary ul {
+  list-style: none;
+  padding: 0;
+}
+
+.cart-summary li {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.item-image {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 5px;
+  margin-right: 15px;
+}
+
+.item-info {
+  font-size: 1rem;
+}
+
+/* Checkout Details as Card */
+.checkout-details {
+  margin-top: 20px;
+}
+
+.checkout-details label {
+  display: block;
+  margin-bottom: 15px;
+}
+
+.checkout-details input[type="text"],
+.checkout-details textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #e0e0e0;
+  font-size: 1rem;
+}
+
+.checkout-details textarea {
+  min-height: 100px;
+}
+
+.checkout-details fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.checkout-details legend {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.checkout-details label input[type="radio"] {
+  margin-right: 10px;
+}
+
+.payment-details {
+  margin-top: 20px;
+}
+
+.payment-details label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.payment-details input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #e0e0e0;
+  font-size: 1rem;
+}
+
+/* Checkout Button */
+.checkout-section button {
+  background-color: #0b3d3d; /* Match button color to navbar */
+  border: none;
+  color: white;
+  padding: 12px 20px;
+  font-size: 1.1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.checkout-section button:hover {
+  background-color: #084a4a; /* Darker shade for hover effect */
+}
+
+/* Empty Cart Message */
+.checkout-section p {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #666;
+}
+
+/* Alert Styles */
+/* Alert Styles */
+.alert {
+  position: fixed;
+  top: 70px; /* Distance from the top of the viewport */
+  right: 10px; /* Distance from the right of the viewport */
+  padding: 15px;
+  border-radius: 5px;
+  background-color: #f8d7da; /* Default error color */
+  color: #721c24; /* Default error text color */
+  opacity: 1;
+  transition: opacity 0.5s ease-out, right 0.5s ease-out; /* Smooth fade-out */
+  z-index: 1000;
+}
+
+/* Success message styles */
 .alert-success {
-    color: green;
-  }
-  
-  .alert-error {
-    color: red;
-  }
-  
-  textarea {
-    width: 100%;
-    height: 100px;
-  }
-  
-  input[type="text"] {
-    width: 100%;
-  }
-  
+  background-color: #d4edda;
+  color: #155724;
+}
+
+/* Error message styles */
+.alert-error {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+/* Fade-out animation */
+.fade-out {
+  opacity: 0;
+  right: 20px; /* Move the alert away from the top-right corner as it fades out */
+}

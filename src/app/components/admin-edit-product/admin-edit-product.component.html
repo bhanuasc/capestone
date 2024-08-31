@@ -14,7 +14,7 @@
     <div *ngFor="let product of products" class="product-card">
       <div *ngIf="!product.editing">
         <h3>{{ product.name }}</h3>
-        <p> <img [src]="product.imageUrl" alt="{{ product.name }}" width="100"></p>
+        <img [src]="product.imageUrl" alt="{{ product.name }}" width="100">
         <p>Price: {{ product.price }}/-</p>
         <p>Stock No: {{ product.quantity }}</p>
         <p>Description: {{ product.description }}</p>
@@ -24,16 +24,34 @@
         <button (click)="deleteProduct(product._id)" class="btn">Delete</button>
       </div>
       <div *ngIf="product.editing">
-        <input [(ngModel)]="product.name" placeholder="Name" />
-        <input [(ngModel)]="product.price" type="number" placeholder="Price" />
-        <input [(ngModel)]="product.quantity" type="number" placeholder="Quantity" />
-        <textarea [(ngModel)]="product.description" placeholder="Description"></textarea>
-        <select [(ngModel)]="product.category">
-          <option value="laptop">Laptop</option>
-          <option value="mobile">Mobile</option>
-          <option value="electronics">Electronics</option>
-        </select>
-        <input [(ngModel)]="product.imageUrl" placeholder="Image URL" />
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input [(ngModel)]="product.name" placeholder="Name" />
+        </div>
+        <div class="form-group">
+          <label for="price">Price</label>
+          <input [(ngModel)]="product.price" type="number" placeholder="Price" />
+        </div>
+        <div class="form-group">
+          <label for="quantity">Quantity</label>
+          <input [(ngModel)]="product.quantity" type="number" placeholder="Quantity" />
+        </div>
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea [(ngModel)]="product.description" placeholder="Description"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="category">Category</label>
+          <select [(ngModel)]="product.category">
+            <option value="laptop">Laptop</option>
+            <option value="mobile">Mobile</option>
+            <option value="electronics">Electronics</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="imageUrl">Image URL</label>
+          <input [(ngModel)]="product.imageUrl" placeholder="Image URL" />
+        </div>
         <button (click)="saveProduct(product)" class="btn">Save</button>
         <button (click)="cancelEdit(product)" class="btn">Cancel</button>
       </div>

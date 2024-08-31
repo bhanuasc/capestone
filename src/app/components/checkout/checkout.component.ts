@@ -22,6 +22,7 @@ export class CheckoutComponent implements OnInit {
   alertMessage: string | null = null;
   alertType: 'success' | 'error' | null = null;
   alertVisible: boolean = false;
+  dMode: 'standard' | 'express' = 'standard'; // Default to standard
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -39,7 +40,11 @@ export class CheckoutComponent implements OnInit {
   }
 
   calculateTotalAmount(): void {
-    this.totalAmount = this.cartProducts.reduce((acc, product) => acc + (product.price * (product.quantity || 1)), 0);
+    const deliveryCost = this.dMode === 'express' ? 400 : 150; // Delivery cost based on dMode
+    this.totalAmount = this.cartProducts.reduce(
+      (acc, product) => acc + (product.price * (product.quantity || 1)),
+      0
+    ) + deliveryCost; // Add delivery cost to total amount
   }
 
   loadUserEmail(): void {
@@ -55,20 +60,26 @@ export class CheckoutComponent implements OnInit {
     this.paymentMethod = method;
   }
 
+  onDModeChange(mode: 'standard' | 'express'): void {
+    this.dMode = mode;
+    this.calculateTotalAmount(); // Recalculate total amount when D Mode changes
+  }
+
   checkout(): void {
     const requestData = {
       cartProducts: this.cartProducts.map(product => ({
         productId: product._id, // Changed _id to productId to match server-side code
         name: product.name,
         price: product.price,
-        quantity: product.quantity || 1
+        quantity: Number(product.quantity) || 1 // Ensure quantity is a number
       })),
       totalAmount: this.totalAmount || 0,
       email: this.email || '',
       address: this.address || '',
       paymentMethod: this.paymentMethod || '',
       cardDetails: this.cardDetails || {},
-      upiId: this.upiId || ''
+      upiId: this.upiId || '',
+      dMode: this.dMode || ''
     };
 
     console.log('Sending request data:', requestData); // Log request data for debugging
@@ -91,13 +102,19 @@ export class CheckoutComponent implements OnInit {
     this.alertMessage = message;
     this.alertType = type;
     this.alertVisible = true;
-
+  
+    // Trigger fade-out after 3 seconds
+    setTimeout(() => {
+      this.alertVisible = false; // Start fading out
+    }, 3000);
+  
+    // Clear the message and type after the fade-out animation duration
     setTimeout(() => {
       this.alertMessage = null;
       this.alertType = null;
-      this.alertVisible = false;
-    }, 3000);
+    }, 3500); // Slightly longer to ensure fade-out completes
   }
+  
 
   clearCart(): void {
     localStorage.removeItem('cart'); // Remove cart from local storage

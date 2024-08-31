@@ -1,0 +1,42 @@
+<div class="home-container">
+    <!-- Hero Section -->
+    <header class="hero">
+      <div class="hero-content">
+        <h1 class="typing-text">Welcome to ZapZy</h1>
+        <section id="about" class="about-us">
+            <h2>About Us</h2>
+            <p class="about-paragraph">
+              At <strong>Zapzy</strong>, we are dedicated to delivering the latest in electronics, laptops, and mobile technology. Our carefully curated selection features top brands and innovative products designed to enhance your digital lifestyle. Whether you're searching for cutting-edge gadgets or essential accessories, Zapzy offers unbeatable quality and value. Explore our diverse range and experience seamless shopping with competitive prices and fast shipping. With exceptional customer service and a passion for technology, we make your shopping experience enjoyable and effortless. Discover the future of technology with Zapzy today!
+            </p>
+          </section>        <button class="shop-now-button" [routerLink]="['/products']">Shop Now</button>
+
+      </div>
+    </header>
+  
+    <!-- Featured Products Section -->
+    <section id="products" class="featured-products">
+        <h2>Featured Products</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <img src="assets/images/laptop.jpg" alt="Laptop">
+                <h3>High Performance Laptops</h3>
+                <p>"Unlock unparalleled computing power with our high-performance laptop. Equipped with the latest processors and high-resolution displays, it’s built to handle demanding applications with ease. Perfect for professionals, gamers, and creatives."</p>
+                <button class="product-button" routerLink="/products/laptop">View Details</button>
+            </div>
+            <div class="product-card">
+                <img src="assets/images/mobiles.jpg" alt="Mobile">
+                <h3>Smart Mobile Phones</h3>
+                <p>"State-of-the-art mobile with exceptional features for a superior experience. Enjoy enhanced performance and sleek design."</p>
+                <button class="product-button" routerLink="/products/mobile">View Details</button>
+            </div>
+            <div class="product-card">
+                <img src="assets/images/electronics.jpg" alt="Electronics">
+                <h3>Various Electronics</h3>
+                <p> "Explore top-tier electronics crafted for your everyday needs. Featuring advanced technology and modern designs, they’re built to integrate seamlessly into your life, delivering convenience and reliability. Ideal for enthusiasts, professionals, and gadget lovers alike."</p>
+                <button class="product-button" routerLink="/products/electronics">View Details</button>
+            </div>
+        </div>
+    </section>
+    
+      
+  

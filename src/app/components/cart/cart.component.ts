@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-cart',
@@ -77,15 +77,25 @@ export class CartComponent implements OnInit {
     this.alertMessage = message;
     this.alertType = type;
     this.alertVisible = true;
-
+  
     setTimeout(() => {
-      this.alertMessage = null;
-      this.alertType = null;
-      this.alertVisible = false;
-    }, 3000); // 3 seconds
+      const alertElement = document.querySelector('.alert');
+      if (alertElement) {
+        alertElement.classList.add('fade-out'); // Add fade-out class to trigger animation
+      }
+      setTimeout(() => {
+        this.alertMessage = null;
+        this.alertType = null;
+        this.alertVisible = false;
+      }, 3000); // Ensure this timeout matches the duration of the fade-out animation
+    }, 3000); // Initial display duration
   }
 
   checkout(): void {
-    this.router.navigate(['/checkout']);
+    if (this.cartProducts.length === 0) {
+      this.showAlert('Your cart is empty. Please add items to the cart before checking out.', 'error');
+    } else {
+      this.router.navigate(['/checkout']);
+    }
   }
 }

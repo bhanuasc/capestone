@@ -1,9 +1,8 @@
 <!-- Alert Box -->
- <br><br>
- <div *ngIf="message" [ngClass]="['alert', messageType, fadeOut ? 'fade-out' : '']">
+<br><br>
+<div *ngIf="message" [ngClass]="['alert', messageType, fadeOut ? 'fade-out' : '']">
   {{ message }}
 </div>
-
 
 <div class="login-container">
     <form (ngSubmit)="onSubmit()">
@@ -33,5 +32,4 @@
   
       <button type="submit" class="btn btn-primary">Login</button>
     </form>
-  </div>
-  
+</div>

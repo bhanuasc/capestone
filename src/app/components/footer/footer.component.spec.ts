@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AdminSubNavbarComponent } from './admin-sub-navbar.component';
+import { FooterComponent } from './footer.component';
 
-describe('AdminSubNavbarComponent', () => {
-  let component: AdminSubNavbarComponent;
-  let fixture: ComponentFixture<AdminSubNavbarComponent>;
+describe('FooterComponent', () => {
+  let component: FooterComponent;
+  let fixture: ComponentFixture<FooterComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AdminSubNavbarComponent]
+      imports: [FooterComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(AdminSubNavbarComponent);
+    fixture = TestBed.createComponent(FooterComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

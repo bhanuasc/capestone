@@ -12,7 +12,12 @@ import { CommonModule } from '@angular/common';
 })
 export class NavbarComponent {
 
+  isMenuOpen = false;
   constructor(public authService: AuthService ,private router: Router) {}
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
+  }
+  
 
   onLogout() {
     if (confirm('Are you sure you want to logout?')) {

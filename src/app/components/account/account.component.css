@@ -1,24 +1,88 @@
-.card {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin: 20px;
-    padding: 20px;
-    max-width: 400px;
-  }
-  
-  .card-header {
-    font-size: 1.5em;
-    margin-bottom: 10px;
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 10px;
-  }
-  
-  .card-body {
-    font-size: 1.2em;
-  }
-  
-  .user-detail {
-    margin-bottom: 10px;
-  }
-  
+/* Global Styles (for NavBar and Page) */
+body {
+  background-color: #0b3d3d; /* Dark mint green for the entire page background */
+  color: white; /* Ensure all text is white for contrast */
+  font-family: 'Georgia', serif; /* Elegant serif font */
+  margin: 0; /* Remove default body margin */
+  padding: 0;
+  min-height: 100vh;
+}
+
+nav {
+  background-color: #0b3d3d; /* Dark mint green for the navbar */
+  padding: 20px 0; /* Add some padding for spacing */
+  position: fixed; /* Fix navbar at the top */
+  width: 100%; /* Full width */
+  top: 0;
+  left: 0;
+  z-index: 1000; /* Ensure it stays on top of other content */
+}
+
+nav a {
+  color: white;
+  font-size: 1.2rem;
+  margin-right: 20px; /* Spacing between nav items */
+  text-decoration: none;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+/* AccountComponent styles */
+.contact-us-section {
+  padding: 0; /* Remove extra padding */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 90px);
+  margin-top: -30px; /* Adjust height to account for fixed navbar */
+
+}
+
+.container {
+  background-color: #f8f8f8; /* Light gray background for the container */
+  padding: 40px;
+  border-radius: 10px;
+  max-width: 600px;
+  width: 100%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  margin: 0 auto; /* Center the container */
+}
+
+.user-details-card {
+  background-color: white;
+  color: #0b3d3d;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px; /* Add some space between the card and the button */
+}
+
+.card-header h3 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.card-body p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.btn-toggle-orders {
+  background-color: #0d5c50; /* Match button color to navbar */
+  border: none;
+  padding: 10px 20px;
+  color: white;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-toggle-orders:hover {
+  background-color: #159582; /* Darker shade for hover effect */
+}
+
+.mt-3 {
+  margin-top: 20px;
+}

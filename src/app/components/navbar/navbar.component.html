@@ -1,54 +1,56 @@
 <nav class="navbar">
     <div class="navbar-brand">
-        myAPP
+        ZapZy
     </div>
-    <ul class="navbar-nav">
-        <!-- Show Login and Signup links only if neither user nor admin is logged in -->
-        <li class="nav-item" *ngIf="!authService.isLoggedIn() && !authService.isAdminLoggedIn()">
-            <a routerLink="/login" routerLinkActive="active">Login</a>
-        </li>
-        <li class="nav-item" *ngIf="!authService.isLoggedIn() && !authService.isAdminLoggedIn()">
-            <a routerLink="/signup" routerLinkActive="active">Signup</a>
-        </li>
 
-        <!-- Show Home, Products, About Us, and Logout links if a regular user is logged in -->
-        <li class="nav-item" *ngIf="authService.isLoggedIn() && !authService.isAdminLoggedIn()">
-            <a routerLink="/home" routerLinkActive="active">Home</a>
-        </li>
-        <li class="nav-item" *ngIf="authService.isLoggedIn() && !authService.isAdminLoggedIn()">
-            <a routerLink="/products" routerLinkActive="active">Products</a>
-        </li>
-        <li class="nav-item" *ngIf="authService.isLoggedIn() && !authService.isAdminLoggedIn()">
-            <a routerLink="/aboutus" routerLinkActive="active">About Us</a>
-        </li>
-        <li class="nav-item" *ngIf="authService.isLoggedIn() && !authService.isAdminLoggedIn()">
-            <a routerLink="/cart" routerLinkActive="active">Cart</a>
-        </li>
-        <li class="nav-item" *ngIf="authService.isLoggedIn() && !authService.isAdminLoggedIn()">
-            <a routerLink="/checkout" routerLinkActive="active">Checkout</a>
-        </li>
-        <li class="nav-item" *ngIf="authService.isLoggedIn() && !authService.isAdminLoggedIn()">
-            <a routerLink="/myorders" routerLinkActive="active">My-Orders</a>
-        </li>
-        <li class="nav-item" *ngIf="authService.isLoggedIn() && !authService.isAdminLoggedIn()">
-            <a routerLink="/account" routerLinkActive="active">Account</a>
-        </li>
-       
-        <li class="nav-item" *ngIf="authService.isLoggedIn() && !authService.isAdminLoggedIn()">
-            <a (click)="onLogout()" style="cursor: pointer;">Logout</a>
-        </li>
-    </ul>
+    <div class="navbar-menu" [ngClass]="{'show': isMenuOpen}">
+        <ul class="navbar-nav">
+            <!-- Show Login and Signup links only if neither user nor admin is logged in -->
+            <li class="nav-item" *ngIf="!authService.isLoggedIn() && !authService.isAdminLoggedIn()">
+                <a routerLink="/login" routerLinkActive="active">Login</a>
+            </li>
+            <li class="nav-item" *ngIf="!authService.isLoggedIn() && !authService.isAdminLoggedIn()">
+                <a routerLink="/signup" routerLinkActive="active">Signup</a>
+            </li>
 
-    <!-- Show Admin-specific links if an admin is logged in -->
-    <ul class="navbar-nav" *ngIf="authService.isAdminLoggedIn()">
-        <li class="nav-item">
-            <a routerLink="/admin/products" routerLinkActive="active">Admin Products</a>
-        </li>
-        <li class="nav-item">
-            <a routerLink="/admin/users" routerLinkActive="active">Admin Users</a>
-        </li>
-        <li class="nav-item">
-            <a (click)="adminLogout()" style="cursor: pointer;">Admin Logout</a>
-        </li>
-    </ul>
+            <!-- Show Home, Products, About Us, and Logout links if a regular user is logged in -->
+            <li class="nav-item" *ngIf="authService.isLoggedIn() && !authService.isAdminLoggedIn()">
+                <a routerLink="/home" routerLinkActive="active">Home</a>
+            </li>
+            <li class="nav-item" *ngIf="authService.isLoggedIn() && !authService.isAdminLoggedIn()">
+                <a routerLink="/products" routerLinkActive="active">Products</a>
+            </li>
+            <li class="nav-item" *ngIf="authService.isLoggedIn() && !authService.isAdminLoggedIn()">
+                <a routerLink="/aboutus" routerLinkActive="active">About Us</a>
+            </li>
+            <li class="nav-item" *ngIf="authService.isLoggedIn() && !authService.isAdminLoggedIn()">
+                <a routerLink="/cart" routerLinkActive="active">Cart</a>
+            </li>
+            <!-- <li class="nav-item" *ngIf="authService.isLoggedIn() && !authService.isAdminLoggedIn()">
+                <a routerLink="/checkout" routerLinkActive="active">Checkout</a>
+            </li> -->
+            <!-- <li class="nav-item" *ngIf="authService.isLoggedIn() && !authService.isAdminLoggedIn()">
+                <a routerLink="/myorders" routerLinkActive="active">My-Orders</a>
+            </li> -->
+            <li class="nav-item" *ngIf="authService.isLoggedIn() && !authService.isAdminLoggedIn()">
+                <a routerLink="/account" routerLinkActive="active">Account</a>
+            </li>
+            <li class="nav-item" *ngIf="authService.isLoggedIn() && !authService.isAdminLoggedIn()">
+                <a (click)="onLogout()" style="cursor: pointer;">Logout</a>
+            </li>
+        </ul>
+
+        <!-- Show Admin-specific links if an admin is logged in -->
+        <ul class="navbar-nav" *ngIf="authService.isAdminLoggedIn()">
+            <li class="nav-item">
+                <a routerLink="/admin/products" routerLinkActive="active">Admin Products</a>
+            </li>
+            <li class="nav-item">
+                <a routerLink="/admin/users" routerLinkActive="active">Admin Users</a>
+            </li>
+            <li class="nav-item">
+                <a (click)="adminLogout()" style="cursor: pointer;">Admin Logout</a>
+            </li>
+        </ul>
+    </div>
 </nav>

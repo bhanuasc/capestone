@@ -1,0 +1,130 @@
+/* Apply to the entire page */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: #0d5c50; /* Body color matching the navbar */
+    color: #fff; /* Font color matching the navbar */
+    font-family: 'Arial', sans-serif;
+    width: 100%;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+/* Footer */
+.footer {
+    padding: 20px;
+    text-align: center;
+    background-color: #0d5c50; /* Body color matching the navbar */
+    color: #fff; /* Font color matching the navbar */
+    position: relative;
+    bottom: 0;
+    width: 100%; /* Ensure full width */
+    box-sizing: border-box; /* Include padding in width calculation */
+}
+
+/* Footer Line */
+.footer::before {
+    content: '';
+    display: block;
+    height: 2px;
+    background: #fff; /* Line color matching the text color */
+    margin-bottom: 20px; /* Space between the line and footer content */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-content {
+        padding: 40px 10px;
+    }
+
+    .typing-text {
+        font-size: 1.5rem; /* Adjust for smaller screens */
+    }
+
+    .subtext {
+        font-size: 0.875rem; /* Adjust for smaller screens */
+    }
+
+    .shop-now-button {
+        font-size: 0.875rem; /* Adjust for smaller screens */
+        padding: 12px 20px;
+    }
+
+    .section-title {
+        font-size: 1.25rem; /* Adjust for smaller screens */
+    }
+
+    .product-card {
+        width: 100%;
+        max-width: 300px; /* Ensure card doesn't get too large on small screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-content {
+        padding: 20px 5px;
+    }
+
+    .typing-text {
+        font-size: 1.25rem; /* Further adjustment for very small screens */
+    }
+
+    .subtext {
+        font-size: 0.75rem; /* Further adjustment for very small screens */
+    }
+
+    .shop-now-button {
+        font-size: 0.75rem; /* Further adjustment for very small screens */
+        padding: 10px 15px;
+    }
+
+    .section-title {
+        font-size: 1rem; /* Further adjustment for very small screens */
+    }
+}
+
+/* Subscribe Form Container */
+.subscribe-form {
+    display: flex;
+    flex-direction: column; /* Stack input and button vertically */
+    align-items: center; /* Center align the form */
+    gap: 10px; /* Space between input and button */
+    margin: 20px auto; /* Center the form with some margin */
+    max-width: 500px; /* Limit the width of the form */
+}
+
+/* Input Field */
+.subscribe-form input[type="email"] {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #fff; /* White border to match theme */
+    border-radius: 5px;
+    font-size: 1rem;
+    color: #0d5c50; /* Text color to match the theme */
+    background-color: #fff; /* White background for input */
+    box-sizing: border-box; /* Ensure padding is included in width */
+}
+
+/* Input Placeholder */
+.subscribe-form input[type="email"]::placeholder {
+    color: #0d5c50; /* Placeholder color matching the theme */
+}
+
+/* Button */
+.subscribe-form button {
+    background-color: #fff; /* White background for button */
+    color: #0d5c50; /* Text color matching the navbar */
+    border: 2px solid #fff; /* White border to match theme */
+    padding: 12px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Button Hover State */
+.subscribe-form button:hover {
+    background-color: #0d5c50; /* Navbar color for hover */
+    color: #fff; /* White text color on hover */
+}
+

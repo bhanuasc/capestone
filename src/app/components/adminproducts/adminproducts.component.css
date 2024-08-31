@@ -13,55 +13,55 @@
     color: #E0E0E0;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     z-index: 1000;
+    border-bottom: 2px solid #ccc; /* Line between navbar and sub-navbar */
   }
   
   /* Sub Navbar */
-  .sub-navbar {
-    position: fixed;
-    top: 70px; /* Placed right below the main navbar */
-    left: 0;
-    width: 100%;
-    background-color: #444444; /* Slightly lighter color for differentiation */
-    color: #E0E0E0;
-    padding: 10px 0; /* Add some padding for better spacing */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-    z-index: 999; /* Slightly less than the main navbar */
-  }
-  
-  /* Sub Navbar Links */
-  .sub-navbar-nav {
-    display: flex;
-    justify-content: right; /* Center the links */
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .sub-nav-item {
-    margin: 0 15px;
-  }
-  
-  .sub-navbar a {
-    color: #E0E0E0;
-    text-decoration: none;
-    font-size: 16px;
-    font-weight: normal;
-    transition: font-size 0.3s, font-weight 0.3s, transform 0.3s;
-  }
-  
-  /* Sub Navbar Links on Hover */
-  .sub-navbar a:hover {
-    font-size: 18px;
-    font-weight: bold;
-    transform: scale(1.1);
-    color: #FFFFFF;
-  }
-  
-  /* Active Link Styling */
-  .sub-navbar a.active {
-    font-weight: bold;
-    border-bottom: 2px solid #FFFFFF;
-  }
+ /* Sub Navbar Styles */
+.sub-navbar {
+  background-color: #0d5c50; /* Green color from the main navbar */
+  display: flex;
+  justify-content: right; /* Center items horizontally */
+  align-items: center;
+  padding: 0 20px;
+  height: 70px; /* Match the main navbar height */
+}
+.separator {
+  border-bottom: 2px solid #ccc; /* Light color for the separator line */
+}
+
+.sub-navbar-nav {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+.sub-nav-item {
+  margin: 0 15px;
+}
+
+.sub-nav-item a {
+  font-family: 'Arial', sans-serif; /* Clean, sans-serif font for the links */
+  font-size: 16px;
+  font-weight: bold;
+  color: white; /* Text color */
+  text-decoration: none;
+}
+
+.sub-nav-item a:hover {
+  color: #ccc; /* Lighter color on hover */
+}
+
+.sub-nav-item a.active {
+  border-bottom: 2px solid white; /* Underline active link */
+}
+
+/* Optional: Ensure the active link is styled similarly to the main navbar */
+.sub-nav-item a.active {
+  border-bottom: 2px solid white; /* Matches the main navbar active link style */
+}
+
   
   /* Adjust body padding to account for both navbars */
   body {

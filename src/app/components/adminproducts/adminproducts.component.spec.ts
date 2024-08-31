@@ -1,16 +1,21 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { AdminproductsComponent } from './adminproducts.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing'; // Import RouterTestingModule if you use Router in your component
+import { AdminproductsComponent } from './adminproducts.component'; // Adjust the import path as needed
 
 describe('AdminproductsComponent', () => {
   let component: AdminproductsComponent;
   let fixture: ComponentFixture<AdminproductsComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [AdminproductsComponent]
-    })
-    .compileComponents();
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [ 
+        HttpClientTestingModule, 
+        RouterTestingModule, // Add RouterTestingModule if needed
+        AdminproductsComponent // Add standalone component here
+      ],
+      providers: [] // Any additional providers can go here
+    }).compileComponents();
 
     fixture = TestBed.createComponent(AdminproductsComponent);
     component = fixture.componentInstance;
@@ -20,4 +25,6 @@ describe('AdminproductsComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  // Add more tests as needed
 });

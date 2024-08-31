@@ -1,13 +1,7 @@
 <div class="filter-container">
   <button class="filter-btn" (click)="toggleFilterMenu()">Filter</button>
   <div class="filter-menu" [ngClass]="{'show': filterMenuVisible}">
-    <select [(ngModel)]="selectedPriceRange">
-      <option value="">Select Price Range</option>
-      <option value="0-50">Under $50</option>
-      <option value="50-100">$50 - $100</option>
-      <option value="100-200">$100 - $200</option>
-      <option value="200+">Above $200</option>
-    </select>
+
     <select [(ngModel)]="selectedCategory">
       <option value="">Select Category</option>
       <option value="laptop">Laptop</option>
@@ -25,10 +19,10 @@
   <div *ngFor="let product of filteredProducts" class="product-card">
     <img [src]="product.imageUrl" alt="{{ product.name }}" class="product-image" />
     <h3>{{ product.name }}</h3>
-    <p>Price: ${{ product.price }}</p>
+    <p>Price: {{ product.price }}/-</p>
     <p>Category: {{ product.category }}</p>
     <p class="description">Description: {{ product.description }}</p>
-    <p *ngIf="product.stock === 0" class="out-of-stock">Out of Stock</p>
+    <p *ngIf="product.quantity === 0" class="out-of-stock">Out of Stock</p>
     <button 
       (click)="addToCart(product)" 
       class="btn" 

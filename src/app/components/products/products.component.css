@@ -1,3 +1,5 @@
+
+/* Product Container */
 .product-container {
   max-width: 1200px; /* Adjust as needed */
   margin: 0 auto;
@@ -7,6 +9,16 @@
   gap: 15px; /* Space between cards */
 }
 
+/* Out of Stock Badge */
+.out-of-stock {
+  color: #721c24; /* Error color */
+  font-weight: bold; /* Bold text for emphasis */
+  background-color: #f8d7da; /* Light red background for visibility */
+  padding: 5px;
+  border-radius: 5px;
+}
+
+/* Disabled Button */
 .btn:disabled,
 .btn[disabled] {
   background-color: #6c757d; /* Grey background for disabled state */
@@ -16,6 +28,7 @@
   opacity: 0.65; /* Slightly faded effect */
 }
 
+/* Product Card */
 .product-card {
   border: 1px solid #ddd;
   border-radius: 5px;
@@ -36,7 +49,7 @@
 }
 
 .product-card img {
-  border: 2px solid #ccc;
+  border: 2px solid #0d5c50; /* Green border matching navbar */
   border-radius: 5px;
   width: 150px;
   height: 150px;
@@ -61,7 +74,7 @@
 }
 
 .product-card .btn {
-  background-color: #007bff;
+  background-color: #0d5c50; /* Match navbar theme */
   color: white;
   border: none;
   padding: 8px 12px; /* Adjusted padding for button */
@@ -71,7 +84,7 @@
 }
 
 .product-card .btn:hover {
-  background-color: #0056b3;
+  background-color: #027a6f; /* Slightly darker green for hover effect */
 }
 
 /* Alert Styles */
@@ -105,9 +118,6 @@
   opacity: 0;
 }
 
-
-/* Existing CSS for Product Cards and Alert remains unchanged */
-
 /* Filter Button Styles */
 .filter-container {
   max-width: 1200px; /* Adjust as needed */
@@ -116,10 +126,12 @@
   display: flex;
   justify-content: flex-end; /* Align filter button to the right */
   margin-bottom: 20px; /* Space between filter button and product cards */
+  margin-top: -40px;
 }
 
 .filter-btn {
-  background-color: #007bff;
+  margin-top: 40px;
+  background-color: #0d5c50; /* Match navbar theme */
   color: white;
   border: none;
   padding: 10px 15px;
@@ -130,7 +142,7 @@
 }
 
 .filter-btn:hover {
-  background-color: #0056b3;
+  background-color: #027a6f; /* Slightly darker green for hover effect */
 }
 
 .filter-menu {
@@ -156,8 +168,6 @@
   margin-bottom: 10px;
 }
 
-/* Existing CSS remains unchanged */
-
 /* Filter Button Group Styles */
 .filter-btn-group {
   display: flex;
@@ -171,5 +181,3 @@
 .filter-btn.remove:hover {
   background-color: #c82333;
 }
-
-

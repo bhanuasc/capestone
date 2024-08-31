@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { NavbarComponent } from './navbar.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing'; // Import HttpClientTestingModule
+import { NavbarComponent } from './navbar.component'; // Adjust the import path as needed
+import { AuthService } from '../../auth.service'; // Adjust the import path as needed
+import { RouterTestingModule } from '@angular/router/testing'; // Import RouterTestingModule if needed
 
 describe('NavbarComponent', () => {
   let component: NavbarComponent;
@@ -8,9 +10,15 @@ describe('NavbarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NavbarComponent]
-    })
-    .compileComponents();
+      imports: [
+        HttpClientTestingModule, // Add HttpClientTestingModule
+        RouterTestingModule, // Add RouterTestingModule if needed
+        NavbarComponent
+      ],
+      providers: [
+        AuthService // Provide AuthService if it's used in the component
+      ]
+    }).compileComponents();
 
     fixture = TestBed.createComponent(NavbarComponent);
     component = fixture.componentInstance;
@@ -20,4 +28,6 @@ describe('NavbarComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  // Add more tests as needed
 });

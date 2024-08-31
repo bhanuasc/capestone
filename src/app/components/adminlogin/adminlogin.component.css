@@ -1,0 +1,113 @@
+/* Form Container */
+form {
+  background-color: #ffffff; /* White background for the form container */
+  padding: 30px;
+  border-radius: 10px;
+  max-width: 500px;
+  margin: 30px auto; /* Center the form with margin */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Heading */
+form h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #0d5c50; /* Theme color for heading */
+  text-align: center;
+}
+
+/* Form Group */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+  color: #0d5c50; /* Theme color for label text */
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #d1d1d1; /* Slightly darker border for input fields */
+  border-radius: 8px;
+  font-size: 1rem;
+  box-sizing: border-box; /* Ensures padding and border are included in the element's total width and height */
+  background-color: #f9f9f9; /* Light background for input fields */
+  transition: border-color 0.3s ease; /* Smooth transition for border color on focus */
+}
+
+.form-group input:focus {
+  border-color: #0d5c50; /* Theme color for input focus border */
+  outline: none; /* Remove default outline */
+}
+
+/* Button Styles */
+.btn-primary {
+  background-color: #0d5c50; /* Match button color to theme */
+  border: none;
+  color: white;
+  padding: 12px 20px;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.btn-primary:hover {
+  background-color: #027a6f; /* Slightly darker green for hover effect */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+}
+
+/* Button Disabled State */
+.btn-primary:disabled {
+  background-color: #6c757d; /* Grey background for disabled state */
+  color: #ffffff; /* White text color */
+  cursor: not-allowed; /* Indicate that the button is not clickable */
+  opacity: 0.65; /* Slightly faded effect */
+}
+
+/* Global Styles (for Alert and Cart) */
+
+/* Alert Styles */
+.alert {
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  font-size: 1.1rem;
+  text-align: center;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  opacity: 1;
+  transition: opacity 0.5s ease-out; /* Transition for fade effect */
+  z-index: 1000;
+}
+
+/* Success Alert */
+.alert-success {
+  background-color: #d4edda; /* Light green background for success */
+  color: #155724; /* Dark green text for success */
+}
+
+/* Error Alert */
+.alert-error {
+  background-color: #f8d7da; /* Light red background for error */
+  color: #721c24; /* Dark red text for error */
+}
+
+/* Fade-out Animation */
+.fade-out {
+  animation: fadeOut 3s forwards; /* Animation for fading out */
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

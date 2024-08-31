@@ -1,82 +1,117 @@
-<div>
-    <h2>Checkout</h2>
-  
-    <div *ngIf="cartProducts.length > 0">
-      <div class="cart-summary">
-        <ul>
-          <li *ngFor="let product of cartProducts">
+<br><br>
+<div class="checkout-section">
+  <h2>Checkout</h2>
+
+  <div *ngIf="cartProducts.length > 0">
+    <div class="cart-summary card">
+      <ul>
+        <li *ngFor="let product of cartProducts" class="cart-item">
+          <img [src]="product.imageUrl" class="item-image" alt="{{ product.name }}">
+          <div class="item-info">
             {{ product.name }} - {{ product.price | currency }} x {{ product.quantity }}
-          </li>
-        </ul>
-  
-        <h3>Total Amount: {{ totalAmount | currency }}</h3>
-      </div>
-  
-      <div class="checkout-details">
-        <!-- User Email (non-editable) -->
-        <label>
-          Email:
-          <input type="text" [value]="email" >
-        </label>
-  
-        <!-- Delivery Address -->
-        <label>
-          Delivery Address:
-          <textarea [(ngModel)]="address" placeholder="Enter your delivery address"></textarea>
-        </label>
-  
-        <!-- Payment Method Selection -->
-        <fieldset>
-          <legend>Payment Method</legend>
-          <label>
-            <input type="radio" name="paymentMethod" value="cash" (change)="onPaymentMethodChange('cash')" [checked]="paymentMethod === 'cash'">
-            Cash
-          </label>
-          <label>
-            <input type="radio" name="paymentMethod" value="credit-card" (change)="onPaymentMethodChange('credit-card')" [checked]="paymentMethod === 'credit-card'">
-            Credit Card
-          </label>
-          <label>
-            <input type="radio" name="paymentMethod" value="upi" (change)="onPaymentMethodChange('upi')" [checked]="paymentMethod === 'upi'">
-            UPI
-          </label>
-        </fieldset>
-  
-        <!-- Credit Card Details -->
-        <div *ngIf="paymentMethod === 'credit-card'" class="payment-details">
-          <label>
-            Card Number:
-            <input type="text" [(ngModel)]="cardDetails.cardNumber" placeholder="1234 5678 9012 3456">
-          </label>
-          <label>
-            Expiry Date:
-            <input type="text" [(ngModel)]="cardDetails.cardExpiry" placeholder="MM/YY">
-          </label>
-          <label>
-            CVV:
-            <input type="text" [(ngModel)]="cardDetails.cardCVV" placeholder="123">
-          </label>
-        </div>
-  
-        <!-- UPI Details -->
-        <div *ngIf="paymentMethod === 'upi'" class="payment-details">
-          <label>
-            UPI ID:
-            <input type="text" [(ngModel)]="upiId" placeholder="example@upi">
-          </label>
-        </div>
-  
-        <button (click)="checkout()">Checkout</button>
-      </div>
+          </div>
+        </li>
+      </ul>
+     
     </div>
-  
-    <div *ngIf="cartProducts.length === 0">
-      <p>Your cart is empty.</p>
-    </div>
-  
-    <!-- Alert System -->
-    <div *ngIf="alertVisible" [ngClass]="{'alert-success': alertType === 'success', 'alert-error': alertType === 'error'}">
-      {{ alertMessage }}
+
+    <div class="checkout-details card">
+      <!-- User Email (non-editable) -->
+      <label>
+        Email:
+        <input type="text" [value]="email" readonly>
+      </label>
+
+      <!-- Delivery Address -->
+      <label>
+        Delivery Address:
+        <textarea [(ngModel)]="address" placeholder="Enter your delivery address"></textarea>
+      </label>
+<!-- D Mode Options -->
+<fieldset>
+  <legend>D Mode Options</legend>
+  <div>
+    <label>
+      <input 
+        type="radio" 
+        name="dMode" 
+        value="standard" 
+        (change)="onDModeChange('standard')" 
+        [checked]="dMode === 'standard'">
+      Standard (150 INR)
+    </label>
+  </div>
+  <div>
+    <label>
+      <input 
+        type="radio" 
+        name="dMode" 
+        value="express" 
+        (change)="onDModeChange('express')" 
+        [checked]="dMode === 'express'">
+      Express (400 INR - additional 250 INR)
+    </label>
+  </div>
+</fieldset>
+
+
+
+      <!-- Payment Method Selection -->
+      <fieldset>
+        <legend>Payment Method</legend>
+        <label>
+          <input type="radio" name="paymentMethod" value="cash" (change)="onPaymentMethodChange('cash')" [checked]="paymentMethod === 'cash'">
+          Cash
+        </label>
+        <label>
+          <input type="radio" name="paymentMethod" value="credit-card" (change)="onPaymentMethodChange('credit-card')" [checked]="paymentMethod === 'credit-card'">
+          Credit Card
+        </label>
+        <label>
+          <input type="radio" name="paymentMethod" value="upi" (change)="onPaymentMethodChange('upi')" [checked]="paymentMethod === 'upi'">
+          UPI
+        </label>
+      </fieldset>
+
+      <!-- Credit Card Details -->
+      <div *ngIf="paymentMethod === 'credit-card'" class="payment-details">
+        <label>
+          Card Number:
+          <input type="text" [(ngModel)]="cardDetails.cardNumber" placeholder="1234 5678 9012 3456">
+        </label>
+        <label>
+          Expiry Date:
+          <input type="text" [(ngModel)]="cardDetails.cardExpiry" placeholder="MM/YY">
+        </label>
+        <label>
+          CVV:
+          <input type="text" [(ngModel)]="cardDetails.cardCVV" placeholder="123">
+        </label>
+      </div>
+
+      <!-- UPI Details -->
+      <div *ngIf="paymentMethod === 'upi'" class="payment-details">
+        <label>
+          UPI ID:
+          <input type="text" [(ngModel)]="upiId" placeholder="example@upi">
+        </label>
+      </div>
+      <h3>Total Amount: {{ totalAmount | currency }}</h3>
+
+      <!-- Checkout Button -->
+      <button (click)="checkout()">Place Order</button>
     </div>
   </div>
-    
+
+  <div *ngIf="!cartProducts.length" class="empty-cart">
+    Your cart is empty.
+  </div>
+
+  <div *ngIf="alertVisible" [ngClass]="{
+    'alert': true,
+    'alert-success': alertType === 'success',
+    'alert-error': alertType === 'error',
+    'fade-out': !alertVisible
+  }">
+    {{ alertMessage }}
+  </div>
