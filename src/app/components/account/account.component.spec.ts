@@ -11,7 +11,7 @@ describe('AccountComponent', () => {
     await TestBed.configureTestingModule({
       imports: [
         HttpClientTestingModule, // Provides a mock HTTP client
-        AccountComponent         // Import standalone component
+        AccountComponent ,        // Import standalone component
       ]
     }).compileComponents();
 
