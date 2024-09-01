@@ -87,3 +87,13 @@ button[type="submit"]:hover {
     opacity: 0;
   }
 }
+
+input.invalid {
+  border: 1px solid red;
+}
+
+.error-message {
+  color: red;
+  font-size: 0.875rem;
+  margin-top: 5px;
+}

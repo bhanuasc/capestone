@@ -1,35 +1,46 @@
 <!-- Alert Box -->
-<br><br>
 <div *ngIf="message" [ngClass]="['alert', messageType, fadeOut ? 'fade-out' : '']">
   {{ message }}
 </div>
 
 <div class="login-container">
-    <form (ngSubmit)="onSubmit()">
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input
-          type="email"
-          id="email"
-          [(ngModel)]="email"
-          name="email"
-          class="form-control"
-          required
-        />
+  <form (ngSubmit)="onSubmit()" #loginForm="ngForm" novalidate>
+    <h2>Login</h2>
+
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        [(ngModel)]="email"
+        #emailField="ngModel"
+        class="form-control"
+        required
+        [class.invalid]="emailField.invalid && emailField.touched"
+      />
+      <div *ngIf="emailField.invalid && emailField.touched" class="error-message">
+        Valid email is required.
       </div>
-  
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input
-          type="password"
-          id="password"
-          [(ngModel)]="password"
-          name="password"
-          class="form-control"
-          required
-        />
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        [(ngModel)]="password"
+        #passwordField="ngModel"
+        class="form-control"
+        required
+        [class.invalid]="passwordField.invalid && passwordField.touched"
+      />
+      <div *ngIf="passwordField.invalid && passwordField.touched" class="error-message">
+        Password is required.
       </div>
-  
-      <button type="submit" class="btn btn-primary">Login</button>
-    </form>
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="!loginForm.valid">Login</button>
+  </form>
 </div>

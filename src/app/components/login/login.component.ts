@@ -21,6 +21,14 @@ export class LoginComponent {
   constructor(private authService: AuthService, private router: Router) {}
 
   onSubmit(): void {
+    if (this.email && this.password) {
+      // Handle successful login logic
+      this.message = 'Login successful!';
+      this.messageType = 'success';
+    } else {
+      this.message = 'Please fill in all fields.';
+      this.messageType = 'error';
+    }
     this.authService.login(this.email, this.password).subscribe(
       () => {
         localStorage.setItem('email', this.email);

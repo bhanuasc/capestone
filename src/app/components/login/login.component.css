@@ -29,7 +29,7 @@ body {
 
 /* Login Container */
 .login-container {
-  max-width: 400px;
+  max-width: 500px; /* Increase max-width for larger screens */
   margin: 50px auto;
   padding: 20px;
   background-color: #fff;
@@ -76,4 +76,78 @@ body {
 
 .btn-primary:hover {
   background-color: #0b4c43; /* Slightly darker shade for hover effect */
+}
+
+/* Media Queries for responsiveness */
+@media (max-width: 768px) {
+  .alert {
+    font-size: 14px;
+    padding: 12px;
+  }
+
+  .login-container {
+    margin: 30px auto;
+    padding: 15px;
+    max-width: 80%; /* Increase container width for tablets */
+  }
+
+  .form-group label {
+    font-size: 14px;
+  }
+
+  .form-control {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .btn-primary {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .alert {
+    font-size: 12px;
+    padding: 10px;
+  }
+
+  .login-container {
+    margin: 20px auto;
+    padding: 10px;
+    max-width: 90%; /* Occupy more screen width on very small screens */
+    height: 70%;
+  }
+
+  .form-group label {
+    font-size: 12px;
+  }
+
+  .form-control {
+    font-size: 12px;
+    padding: 6px;
+  }
+
+  .btn-primary {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+}
+
+/* Styles for invalid form inputs */
+input.invalid {
+  border: 1px solid red;
+}
+
+.error-message {
+  color: red;
+  font-size: 0.875rem;
+  margin-top: 5px;
+}
+.login-container h2 {
+  font-size: 2rem; /* Adjust to your desired size */
+  font-family: Georgia, serif;
+  margin-bottom: 20px; /* Adjust for spacing */
+  color: #0d5c50; /* Adjust color to match theme */
+  text-align: center; /* Center align the heading */
 }

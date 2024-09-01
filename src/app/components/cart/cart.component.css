@@ -1,5 +1,4 @@
 /* Global Styles (for Alert and Cart) */
-
 html, body {
   background-color: #0d5c50; /* Green color matching the theme */
   color: #ffffff; /* Set text color to white for better contrast */
@@ -40,7 +39,6 @@ html, body {
   opacity: 0;
 }
 
-/* Add an alert fade-out class */
 .alert.fade-out {
   animation: fadeOut 3s forwards; /* Animation for fading out */
 }
@@ -60,7 +58,7 @@ html, body {
   padding: 20px;
   border-radius: 10px;
   max-width: 900px;
-  width: 600px;
+  width: 90%; /* Adjusted for smaller screens */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin: 20px auto; /* Center the container with margin */
   margin-top: -30px;
@@ -82,6 +80,7 @@ html, body {
   align-items: center;
   padding: 15px;
   border-bottom: 1px solid #e0e0e0;
+  flex-wrap: wrap; /* Allow wrapping on smaller screens */
 }
 
 .item-image {
@@ -94,6 +93,7 @@ html, body {
 
 .item-info {
   flex-grow: 1;
+  min-width: 150px; /* Ensure text doesn't get too squished */
 }
 
 .item-info h4 {
@@ -103,6 +103,10 @@ html, body {
 
 .item-info p {
   margin: 5px 0;
+}
+
+.quantity-controls {
+  margin-top: 10px; /* Add spacing on smaller screens */
 }
 
 .quantity-controls button {
@@ -118,6 +122,10 @@ html, body {
 
 .quantity-controls button:hover {
   background-color: #027a6f; /* Slightly darker green for hover effect */
+}
+
+.item-actions {
+  margin-top: 10px; /* Add spacing on smaller screens */
 }
 
 .item-actions button {
@@ -168,4 +176,90 @@ html, body {
 
 .checkout-summary button:hover {
   background-color: #027a6f; /* Slightly darker green for hover effect */
+}
+
+/* Media Queries for Smaller Screens */
+@media (max-width: 768px) {
+  .checkout-container {
+    width: 95%; /* Make the container more flexible */
+    padding: 15px; /* Reduce padding on smaller screens */
+    min-height: auto; /* Remove minimum height constraint */
+  }
+
+  .cart-item {
+    flex-direction: column; /* Stack items vertically on smaller screens */
+    align-items: flex-start;
+  }
+
+  .item-image {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 10px; /* Add margin at the bottom */
+  }
+
+  .item-info h4 {
+    font-size: 1.2rem; /* Reduce font size */
+  }
+
+  .quantity-controls button, .item-actions button {
+    padding: 8px; /* Reduce padding */
+    font-size: 0.9rem; /* Slightly smaller text */
+  }
+
+  .checkout-summary h3 {
+    font-size: 1.5rem; /* Smaller font for smaller screens */
+  }
+
+  .checkout-summary p {
+    font-size: 1rem; /* Adjust font size */
+  }
+
+  .checkout-summary button {
+    padding: 8px 16px; /* Reduce button padding */
+    font-size: 0.9rem; /* Smaller font size */
+  }
+}
+
+@media (max-width: 480px) {
+  .checkout-container {
+    width: 100%; /* Full width on very small screens */
+    padding: 10px;
+    border-radius: 0; /* Remove border radius for full-width */
+  }
+
+  .checkout-container h2 {
+    font-size: 1.5rem; /* Smaller font size */
+    text-align: center;
+  }
+
+  .item-image {
+    width: 50px;
+    height: 50px;
+  }
+
+  .item-info h4 {
+    font-size: 1rem;
+  }
+
+  .item-info p {
+    font-size: 0.9rem; /* Smaller paragraph text */
+  }
+
+  .quantity-controls button, .item-actions button {
+    padding: 5px 10px; /* Further reduce padding */
+    font-size: 0.8rem; /* Smaller button text */
+  }
+
+  .checkout-summary h3 {
+    font-size: 1.3rem; /* Smaller font for summary heading */
+  }
+
+  .checkout-summary p {
+    font-size: 0.9rem; /* Adjust font size */
+  }
+
+  .checkout-summary button {
+    padding: 6px 12px; /* Reduce button padding */
+    font-size: 0.8rem; /* Smaller font size */
+  }
 }

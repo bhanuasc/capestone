@@ -9,38 +9,38 @@
     background-color: #0d5c50; /* Navbar color */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     flex-wrap: wrap; /* Allows content to wrap on smaller screens */
-  }
-  
-  /* About Text */
-  .about-text {
+}
+
+/* About Text */
+.about-text {
     flex: 1 1 50%; /* Takes 50% width and adjusts for responsiveness */
     padding-right: 30px;
-  }
-  
-  .about-text h3 {
+}
+
+.about-text h3 {
     font-size: 14px;
     color: #f8d7da; /* Light red color for subheading */
     text-transform: uppercase;
     letter-spacing: 2px;
     margin-bottom: 10px;
-  }
-  
-  .about-text h1 {
+}
+
+.about-text h1 {
     font-size: 32px;
     font-weight: 700;
     margin-bottom: 20px;
     line-height: 1.2;
     color: #fff; /* White color for the main heading */
-  }
-  
-  .about-text p {
+}
+
+.about-text p {
     font-size: 16px;
     color: #d4edda; /* Light green color for paragraph */
     line-height: 1.6;
     margin-bottom: 20px;
-  }
-  
-  .about-text button {
+}
+
+.about-text button {
     background-color: #fff; /* White background for button */
     color: #0d5c50; /* Match navbar color */
     padding: 10px 20px;
@@ -48,62 +48,61 @@
     border: none;
     cursor: pointer;
     transition: background-color 0.3s;
-  }
-  
-  .about-text button:hover {
+}
+
+.about-text button:hover {
     background-color: #d4edda; /* Light green for hover effect */
     color: #0d5c50; /* Match navbar color */
-  }
-  
-  /* About Image */
-  .about-image {
+}
+
+/* About Image */
+.about-image {
     flex: 0 1 250px; /* Flex-grow: 0, Flex-shrink: 1, and Flex-basis: 250px */
     margin-top: 20px; /* Adds space on top in case it wraps */
-  }
-  
-  .about-image img {
+}
+
+.about-image img {
     width: 100%; /* Full width within its flex container */
     height: auto; /* Adjusts height proportionally */
     object-fit: cover;
     border-radius: 10px;
     border: 1px solid #ddd; /* Light grey border */
-  }
-  
-  /* Media queries for responsiveness */
-  @media (max-width: 768px) {
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
     .about-container {
-      flex-direction: column; /* Stack items vertically */
-      align-items: flex-start; /* Align items to the start */
-      padding: 20px; /* Reduce padding for smaller screens */
+        flex-direction: column; /* Stack items vertically */
+        align-items: flex-start; /* Align items to the start */
+        padding: 20px; /* Reduce padding for smaller screens */
     }
-  
+
     .about-text {
-      padding-right: 0; /* Remove right padding on smaller screens */
+        padding-right: 0; /* Remove right padding on smaller screens */
     }
-  
+
     .about-image {
-      width: 100%; /* Image takes full width */
-      margin-top: 20px; /* Space between text and image */
+        width: 100%; /* Image takes full width */
+        margin-top: 20px; /* Space between text and image */
     }
-  
+
     .about-image img {
-      width: 100%; /* Image takes full width */
-      height: auto; /* Auto-adjust height */
+        width: 100%; /* Image takes full width */
+        height: auto; /* Auto-adjust height */
     }
-  }
-  
-  @media (max-width: 480px) {
+}
+
+@media (max-width: 480px) {
     .about-text h1 {
-      font-size: 24px; /* Smaller heading size */
+        font-size: 24px; /* Smaller heading size */
     }
-  
+
     .about-text p {
-      font-size: 14px; /* Smaller paragraph size */
+        font-size: 14px; /* Smaller paragraph size */
     }
-  
+
     .about-text button {
-      padding: 8px 16px; /* Adjust button padding */
-      font-size: 14px; /* Smaller button text size */
+        padding: 8px 16px; /* Adjust button padding */
+        font-size: 14px; /* Smaller button text size */
     }
-  }
-  
+}

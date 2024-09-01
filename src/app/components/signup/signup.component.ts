@@ -24,6 +24,14 @@ export class SignupComponent {
   constructor(private http: HttpClient, private router: Router) {}
 
   onSubmit() {
+    if (this.user.username && this.user.email && this.user.password.length >= 8) {
+      // Handle successful signup logic
+      this.message = 'Signup successful!';
+      this.messageType = 'success';
+    } else {
+      this.message = 'Please fill in all fields correctly.';
+      this.messageType = 'error';
+    }
     this.http.post('http://localhost:3000/api/signup', this.user)
       .subscribe(
         () => {

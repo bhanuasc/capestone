@@ -3,58 +3,59 @@ html, body {
     margin: 0;
     padding: 0;
     height: 100%;
-    background-color: #0d5c50; /* Body color matching the navbar */
-    color: #fff; /* Font color matching the navbar */
-  }
-  
-  /* Home Container */
-  .home-container {
+    background-color: #0d5c50; /* Body color */
+    color: #fff; /* Font color */
     font-family: 'Arial', sans-serif;
-    color: #fff; /* White font color for contrast */
-    background-color: #0d5c50; /* Navbar color for entire body background */
-    margin: 0;
-    padding: 0;
+}
+
+/* Home Container */
+.home-container {
+    color: #fff;
+    background-color: #0d5c50;
     min-height: 100vh;
-  }
-  
-  /* About Us Section */
-  .about-us {
+    box-sizing: border-box;
+    padding: 0 20px; /* Padding for content alignment */
+    margin-top: -21px;
+}
+
+/* About Us Section */
+.about-us {
     padding: 40px 20px;
-    background: #0d5c50; /* Body color matching the navbar */
+    background: #0d5c50;
     text-align: center;
-  }
-  
-  .about-us h2 {
-    font-size: 2rem; /* Adjust the size for prominence */
-    margin-bottom: 20px; /* Space between heading and paragraph */
-    color: #fff; /* Heading color */
-  }
-  
-  .about-paragraph {
-    max-width: 800px; /* Limit the width for better readability */
-    margin: 0 auto; /* Center the paragraph */
-    line-height: 1.8; /* Increased line height for readability */
-    font-size: 1rem; /* Font size for comfortable reading */
-    color: #fff; /* Font color matching the navbar */
-    text-align: left; /* Align text to the left for readability */
-    padding: 0 20px; /* Add padding for better spacing */
-  }
-  
-  /* Hero Section */
-  .hero {
-    background-color: #0d5c50; /* Navbar color */
+}
+
+.about-us h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+/* Default Paragraph Styles */
+p {
+    max-width: none; /* Ensure paragraphs use full width available */
+    margin: 0 0 15px; /* Margin below each paragraph */
+    line-height: 1.8;
+    font-size: 1rem;
+    text-align: left;
+    color: #ffffff; /* White text color for better contrast */
+}
+
+/* Hero Section */
+.hero {
+    background-color: #0d5c50;
     color: #fff;
     text-align: center;
     padding: 80px 20px;
     position: relative;
-  }
-  
-  .hero-content {
+}
+
+.hero-content {
     max-width: 800px;
     margin: 0 auto;
-  }
-  
-  .typing-text {
+}
+
+.typing-text {
     font-size: 3rem;
     font-weight: bold;
     margin-bottom: 20px;
@@ -62,93 +63,93 @@ html, body {
     overflow: hidden;
     border-right: 4px solid #fff;
     animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
-  }
-  
-  .subtext {
+}
+
+.subtext {
     font-size: 1.25rem;
     margin-bottom: 30px;
-  }
-  
-  .shop-now-button {
-    background-color: #fff;
-    color: #0d5c50; /* Font color matching navbar */
+}
+
+.shop-now-button {
+    background-color: #ffffff;
+    color: #0d5c50;
     border: 2px solid #fff;
     padding: 15px 30px;
     border-radius: 5px;
     font-size: 1rem;
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s;
-  }
-  
-  .shop-now-button:hover {
-    background-color: #0d5c50; /* Navbar color for hover */
+}
+
+.shop-now-button:hover {
+    background-color: #0d5c50;
     color: #fff;
-  }
-  
-  /* Typing Effect Animation */
-  @keyframes typing {
+}
+
+/* Typing Effect Animation */
+@keyframes typing {
     from { width: 0; }
     to { width: 100%; }
-  }
-  
-  @keyframes blink-caret {
+}
+
+@keyframes blink-caret {
     from, to { border-color: transparent; }
     50% { border-color: #fff; }
-  }
-  
-  /* Product Grid Section */
-  .featured-products {
+}
+
+/* Product Grid Section */
+.featured-products {
     padding: 40px 20px;
     text-align: center;
-    background-color: #0d5c50; /* Body color matching the navbar */
-  }
-  
-  .featured-products h2 {
+    background-color: #0d5c50;
+}
+
+.featured-products h2 {
     font-size: 2rem;
     color: #fff;
     margin-bottom: 30px;
-  }
-  
-  .product-grid {
+}
+
+.product-grid {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     gap: 20px;
-  }
-  
-  .product-card {
-    background: #fff; /* White background for product cards */
+}
+
+.product-card {
+    background: #fff;
     border: 1px solid #ddd;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 300px;
     padding: 20px;
     text-align: center;
-    color: #333; /* Dark text for readability */
-  }
-  
-  .product-card img {
+    color: #333;
+}
+
+.product-card img {
     max-width: 100%;
     height: auto;
     border-bottom: 1px solid #ddd;
     margin-bottom: 15px;
-  }
-  
-  .product-card h3 {
+}
+
+.product-card h3 {
     margin: 15px 0;
     font-size: 1.5rem;
-    color: #0d5c50; /* Match navbar color for headings */
-  }
-  
-  .product-card p {
+    color: #0d5c50;
+}
+
+.product-card p {
     margin: 0 0 15px;
     font-size: 0.875rem;
     line-height: 1.6;
-    color: #666; /* Slightly lighter color for text */
-  }
-  
-  .product-button {
-    background-color: #0d5c50; /* Navbar color */
+    color: #666;
+}
+
+.product-button {
+    background-color: #0d5c50;
     color: #fff;
     border: none;
     padding: 10px 20px;
@@ -156,44 +157,48 @@ html, body {
     font-size: 0.875rem;
     cursor: pointer;
     transition: background-color 0.3s;
-  }
-  
-  .product-button:hover {
-    background-color: #0a4a44; /* Darker shade for hover effect */
-  }
-  
-  /* Responsive Styles */
-  @media (max-width: 768px) {
+}
+
+.product-button:hover {
+    background-color: #0a4a44;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
     .hero {
-      padding: 60px 15px; /* Adjust padding for smaller screens */
+        padding: 60px 15px;
     }
-  
+
     .typing-text {
-      font-size: 2.5rem; /* Smaller font size for mobile */
+        font-size: 2.5rem;
     }
-  
+
     .subtext {
-      font-size: 1rem; /* Smaller font size for mobile */
+        font-size: 1rem;
     }
-  
+
     .shop-now-button {
-      font-size: 0.875rem; /* Smaller font size for mobile */
-      padding: 10px 20px; /* Adjust padding for smaller screens */
+        font-size: 0.875rem;
+        padding: 10px 20px;
     }
-  
+
     .about-paragraph {
-      font-size: 0.875rem; /* Smaller font size for better readability on mobile */
-      padding: 0 10px; /* Less padding on mobile */
+        font-size: 1rem; 
+        line-height: 1.8;
+        padding: 15px 20px;
+        color: #ffffff;
+        background-color: #2a8073; /* Matching the color change */
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     }
-  
+
     .product-card {
-      width: 100%; /* Full width for product cards on mobile */
-      max-width: 300px; /* Limit maximum width */
+        width: 100%;
+        max-width: 300px;
     }
-  
+
     .product-button {
-      font-size: 0.75rem; /* Smaller font size for mobile */
-      padding: 8px 16px; /* Adjust padding for mobile */
+        font-size: 0.75rem;
+        padding: 8px 16px;
     }
-  }
-  
+}

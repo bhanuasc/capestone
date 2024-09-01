@@ -1,28 +1,61 @@
-<!-- signup.component.html -->
 <div *ngIf="message" class="alert" [ngClass]="{'alert-error': messageType === 'error', 'fade-out': fadeOut}">
   {{ message }}
 </div>
 <br>
 
 <div class="signup-container">
-    
-    <form (ngSubmit)="onSubmit()" #signupForm="ngForm">
-      <h2>Signup</h2>
-      <div class="form-group">
-        <label for="username">Name:</label>
-        <input type="text" id="username" name="username" [(ngModel)]="user.username" required>
+  <form (ngSubmit)="onSubmit()" #signupForm="ngForm" novalidate>
+    <h2>Signup</h2>
+
+    <div class="form-group">
+      <label for="username">Name:</label>
+      <input 
+        type="text" 
+        id="username" 
+        name="username" 
+        [(ngModel)]="user.username" 
+        #username="ngModel" 
+        required
+        [class.invalid]="username.invalid && username.touched"
+      >
+      <div *ngIf="username.invalid && username.touched" class="error-message">
+        Name is required.
       </div>
-      <div class="form-group">
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" [(ngModel)]="user.email" required>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input 
+        type="email" 
+        id="email" 
+        name="email" 
+        [(ngModel)]="user.email" 
+        #email="ngModel" 
+        required
+        [class.invalid]="email.invalid && email.touched"
+      >
+      <div *ngIf="email.invalid && email.touched" class="error-message">
+        Valid email is required.
       </div>
-  
-      <div class="form-group">
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" [(ngModel)]="user.password" required>
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input 
+        type="password" 
+        id="password" 
+        name="password" 
+        [(ngModel)]="user.password" 
+        #password="ngModel" 
+        required
+        minlength="8"
+        [class.invalid]="password.invalid && password.touched"
+      >
+      <div *ngIf="password.invalid && password.touched" class="error-message">
+        Password is required and must be at least 8 characters long.
       </div>
-  
-      <button type="submit" [disabled]="!signupForm.valid">Signup</button>
-    </form>
-  </div>
-  
+    </div>
+
+    <button type="submit" [disabled]="!signupForm.valid">Signup</button>
+  </form>
+</div>
