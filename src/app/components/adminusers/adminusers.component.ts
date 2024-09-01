@@ -10,6 +10,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./adminusers.component.css']
 })
 export class AdminusersComponent implements OnInit {
+  someProperty(someProperty: any) {
+    throw new Error('Method not implemented.');
+  }
+  methodName() {
+    throw new Error('Method not implemented.');
+  }
   users: any[] = [];
 
   constructor(private http: HttpClient) {}

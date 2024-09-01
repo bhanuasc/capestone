@@ -9,5 +9,11 @@ import { Router } from '@angular/router';
   styleUrl: './aboutus.component.css'
 })
 export class AboutusComponent {
+  showDescription(showDescription: any) {
+    throw new Error('Method not implemented.');
+  }
+  toggleDescription() {
+    throw new Error('Method not implemented.');
+  }
 
 }

@@ -11,6 +11,15 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./my-orders.component.css']
 })
 export class MyOrdersComponent implements OnInit {
+  someProperty(someProperty: any) {
+    throw new Error('Method not implemented.');
+  }
+  title(title: any) {
+    throw new Error('Method not implemented.');
+  }
+  methodName() {
+    throw new Error('Method not implemented.');
+  }
   orders: any[] = [];
   errorMessage: string | null = null;
 

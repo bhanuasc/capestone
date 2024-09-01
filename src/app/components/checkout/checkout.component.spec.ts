@@ -1,8 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule } from '@angular/common/http/testing'; // Import HttpClientTestingModule
-import { RouterTestingModule } from '@angular/router/testing'; // Import RouterTestingModule if needed
-import { CheckoutComponent } from './checkout.component'; // Adjust the import path as needed
-import { FormsModule } from '@angular/forms'; // Import FormsModule if your component uses template-driven forms
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { FormsModule } from '@angular/forms';
+import { CheckoutComponent } from './checkout.component';
 
 describe('CheckoutComponent', () => {
   let component: CheckoutComponent;
@@ -11,10 +10,9 @@ describe('CheckoutComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        HttpClientTestingModule, // Add HttpClientTestingModule
-        RouterTestingModule, // Add RouterTestingModule if needed
-        FormsModule, // Add FormsModule if needed
-        CheckoutComponent // Import the standalone component directly
+        HttpClientTestingModule,
+        FormsModule,
+        CheckoutComponent
       ]
     }).compileComponents();
 
@@ -23,9 +21,16 @@ describe('CheckoutComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create the component', () => {
     expect(component).toBeTruthy();
   });
 
-  // Add more tests as needed
+
+
+  it('should change the payment method', () => {
+    component.onPaymentMethodChange('credit-card');
+    expect(component.paymentMethod).toBe('credit-card');
+  });
+
+
 });

@@ -12,6 +12,12 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+  errorMessage(errorMessage: any) {
+    throw new Error('Method not implemented.');
+  }
+  resetMessageAfterTimeout() {
+    throw new Error('Method not implemented.');
+  }
   email: string = '';
   password: string = '';
   message: string | null = null;

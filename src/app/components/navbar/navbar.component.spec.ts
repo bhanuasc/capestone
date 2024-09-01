@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule } from '@angular/common/http/testing'; // Import HttpClientTestingModule
-import { NavbarComponent } from './navbar.component'; // Adjust the import path as needed
-import { AuthService } from '../../auth.service'; // Adjust the import path as needed
-import { RouterTestingModule } from '@angular/router/testing'; // Import RouterTestingModule if needed
+import { RouterTestingModule } from '@angular/router/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { NavbarComponent } from './navbar.component';
+import { AuthService } from '../../auth.service';
 
 describe('NavbarComponent', () => {
   let component: NavbarComponent;
@@ -11,12 +11,12 @@ describe('NavbarComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        HttpClientTestingModule, // Add HttpClientTestingModule
-        RouterTestingModule, // Add RouterTestingModule if needed
-        NavbarComponent
+        HttpClientTestingModule, // Mock HTTP services
+        RouterTestingModule,     // Mock router services
+        NavbarComponent          // Import the standalone component directly
       ],
       providers: [
-        AuthService // Provide AuthService if it's used in the component
+        AuthService              // Provide any services used by the component
       ]
     }).compileComponents();
 

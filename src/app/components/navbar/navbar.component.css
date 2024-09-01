@@ -7,12 +7,14 @@
   padding: 0 20px;
   height: 70px;
   position: relative;
+  overflow: hidden; /* Prevents overflow */
 }
 
 /* Container for brand and hamburger icon */
 .navbar-brand-and-hamburger {
   display: flex;
   align-items: center;
+  flex-shrink: 0; /* Prevents shrinking */
 }
 
 /* Brand Styling */
@@ -28,6 +30,8 @@
 .navbar-menu {
   display: flex;
   flex-direction: row;
+  overflow: hidden; /* Prevents overflow within the navbar-menu */
+  flex-shrink: 1; /* Allows the menu to shrink if necessary */
 }
 
 .navbar-nav {
@@ -88,6 +92,7 @@
   transition: left 0.3s ease;
   padding-top: 60px;
   z-index: 1000;
+  overflow-y: auto; /* Allows vertical scrolling if needed */
 }
 
 .navbar-menu.show {
@@ -112,6 +117,17 @@
   cursor: pointer;
 }
 
+/* Cart Icon */
+.cart-icon {
+  width: 24px; /* Adjust size as needed */
+  height: auto; /* Maintain aspect ratio */
+}
+
+/* Cart Icon for Mobile */
+.cart-icon-mobile {
+  display: none;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   /* Hamburger Icon Visible on Small Screens */
@@ -129,6 +145,24 @@
     display: block;
     left: 0;
   }
+
+  /* Display cart icon in mobile view */
+  .navbar {
+    position: relative; /* Ensure relative positioning for cart icon */
+  }
+
+  .cart-icon {
+    display: none; /* Hide cart icon for larger screens */
+  }
+
+  .cart-icon-mobile {
+    display: block; /* Show mobile-specific cart icon */
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    width: 20px; /* Adjust size for mobile */
+    height: auto;
+  }
 }
 
 @media (min-width: 769px) {
@@ -140,6 +174,7 @@
     flex-direction: row;
     padding-top: 0;
     width: auto;
+    overflow: hidden; /* Prevents overflow on larger screens */
   }
 
   /* Hide the hamburger icon */
@@ -159,5 +194,17 @@
   /* Hide the close icon on larger screens */
   .close-icon {
     display: none;
+  }
+
+  /* Hide mobile-specific cart icon */
+  .cart-icon-mobile {
+    display: none;
+  }
+
+  /* Display regular cart icon for larger screens */
+  .cart-icon {
+    display: block;
+    width: 24px; /* Adjust size for desktop */
+    height: auto;
   }
 }

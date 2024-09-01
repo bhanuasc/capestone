@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
+import { adminguardGuard } from './adminguard.guard';
 import { AuthService } from './auth.service';
-import { adminguardGuard } from './adminguard.guard'; // Ensure the correct import
 
 describe('adminguardGuard', () => {
   let guard: adminguardGuard;
@@ -9,16 +9,14 @@ describe('adminguardGuard', () => {
   let router: Router;
 
   beforeEach(() => {
-    const authServiceStub = { isAdminLoggedIn: jasmine.createSpy('isAdminLoggedIn').and.returnValue(true) };
-    const routerStub = { navigate: jasmine.createSpy('navigate') };
-
     TestBed.configureTestingModule({
       providers: [
         adminguardGuard,
-        { provide: AuthService, useValue: authServiceStub },
-        { provide: Router, useValue: routerStub }
+        { provide: AuthService, useValue: { isAdminLoggedIn: jasmine.createSpy('isAdminLoggedIn') } },
+        { provide: Router, useValue: { navigate: jasmine.createSpy('navigate') } }
       ]
     });
+
     guard = TestBed.inject(adminguardGuard);
     authService = TestBed.inject(AuthService);
     router = TestBed.inject(Router);
@@ -28,14 +26,27 @@ describe('adminguardGuard', () => {
     expect(guard).toBeTruthy();
   });
 
-  it('should allow activation if admin is logged in', () => {
+  it('should allow activation if the user is an admin', () => {
+    // Arrange
     (authService.isAdminLoggedIn as jasmine.Spy).and.returnValue(true);
-    expect(guard.canActivate()).toBe(true);
+
+    // Act
+    const result = guard.canActivate();
+
+    // Assert
+    expect(result).toBeTrue();
+    expect(router.navigate).not.toHaveBeenCalled();
   });
 
-  it('should deny activation and redirect if admin is not logged in', () => {
+  it('should redirect to admin login if the user is not an admin', () => {
+    // Arrange
     (authService.isAdminLoggedIn as jasmine.Spy).and.returnValue(false);
-    expect(guard.canActivate()).toBe(false);
+
+    // Act
+    const result = guard.canActivate();
+
+    // Assert
+    expect(result).toBeFalse();
     expect(router.navigate).toHaveBeenCalledWith(['/admin/login']);
   });
 });

@@ -6,6 +6,10 @@ html, body {
   padding: 0;
   font-family: Arial, sans-serif; /* Adjust font family as needed */
 }
+.checkout-container h2{
+font-family: 'Georgia', serif;
+}
+
 
 /* Alert Styles */
 .alert {
@@ -61,7 +65,7 @@ html, body {
   width: 90%; /* Adjusted for smaller screens */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin: 20px auto; /* Center the container with margin */
-  margin-top: -30px;
+  margin-top: -10px;
   min-height: 600px;
 }
 

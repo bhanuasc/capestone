@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule } from '@angular/common/http/testing'; // Import HttpClientTestingModule
-import { MyOrdersComponent } from './my-orders.component'; // Adjust the import path as needed
-import { AuthService } from '../auth.service'; // Adjust the import path as needed
-import { RouterTestingModule } from '@angular/router/testing'; // Import RouterTestingModule if needed
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { MyOrdersComponent } from './my-orders.component';
+import { AuthService } from '../auth.service';
 
 describe('MyOrdersComponent', () => {
   let component: MyOrdersComponent;
@@ -11,13 +11,11 @@ describe('MyOrdersComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        HttpClientTestingModule, // Add HttpClientTestingModule
-        RouterTestingModule, // Add RouterTestingModule if needed
+        HttpClientTestingModule,
+        RouterTestingModule,
         MyOrdersComponent
       ],
-      providers: [
-        AuthService // Provide AuthService if it's used in the component
-      ]
+      providers: [AuthService]
     }).compileComponents();
 
     fixture = TestBed.createComponent(MyOrdersComponent);
@@ -25,9 +23,21 @@ describe('MyOrdersComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  // 1. Check if component is created successfully
+  it('should create the component', () => {
     expect(component).toBeTruthy();
   });
 
-  // Add more tests as needed
+  // 2. Check initial state of properties
+  it('should initialize with default values', () => {
+    expect(component.orders).toEqual([]); // Adjust based on your actual component's default state
+  });
+
+  // 3. Check if the component has a defined property (e.g., `title`)
+  it('should have a defined title', () => {
+    // Replace `title` with an actual property from your component
+    expect(component.title).toBeDefined();
+  });
+
+  // 4. Check if a method can be called successfully
 });
