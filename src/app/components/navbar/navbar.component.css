@@ -1,18 +1,33 @@
+/* Navbar Styles */
 .navbar {
-  background-color: #0d5c50; /* Green color from the image */
+  background-color: #0d5c50;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 20px;
   height: 70px;
+  position: relative;
 }
 
+/* Container for brand and hamburger icon */
+.navbar-brand-and-hamburger {
+  display: flex;
+  align-items: center;
+}
+
+/* Brand Styling */
 .navbar-brand {
-  font-family: 'Georgia', serif; /* Serif font similar to the image */
+  font-family: 'Georgia', serif;
   font-size: 30px;
   font-weight: bold;
   color: white;
-  margin-left: 20px;
+  margin-left: 10px;
+}
+
+/* Regular Navbar Menu */
+.navbar-menu {
+  display: flex;
+  flex-direction: row;
 }
 
 .navbar-nav {
@@ -27,7 +42,7 @@
 }
 
 .nav-item a {
-  font-family: 'Arial', sans-serif; /* Clean, sans-serif font for the links */
+  font-family: 'Arial', sans-serif;
   font-size: 16px;
   font-weight: bold;
   color: white;
@@ -35,29 +50,119 @@
 }
 
 .nav-item a:hover {
-  color: #ccc; /* Lighter color on hover */
+  color: #ccc;
 }
 
 .nav-item a.active {
-  border-bottom: 2px solid white; /* Underline active link */
+  border-bottom: 2px solid white;
 }
 
-.cart-icon {
-  position: relative;
-  font-size: 24px;
-  color: white;
+/* Hamburger Menu Icon, initially hidden */
+.hamburger-icon {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
 }
 
-.cart-icon::after {
-  content: attr(data-count);
-  position: absolute;
-  top: -10px;
-  right: -10px;
+.hamburger-icon span {
+  width: 23px;
+  height: 2px;
   background-color: white;
-  color: #0d5c50;
-  border-radius: 50%;
-  padding: 2px 6px;
-  font-size: 12px;
-  font-weight: bold;
+  margin: 4px 0;
 }
 
+/* Side Menu for Small Screens */
+.navbar-menu {
+  display: none;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: -250px;
+  width: 250px;
+  height: 100%;
+  background-color: #f0f0f0; /* Light grey background */
+  transition: left 0.3s ease;
+  padding-top: 60px;
+  z-index: 1000;
+}
+
+.navbar-menu.show {
+  left: 0;
+}
+
+.navbar-nav {
+  flex-direction: column;
+}
+
+.nav-item {
+  padding: 15px 20px;
+}
+
+.nav-item a {
+  color: #0d5c50; /* Green font color for the menu items */
+  font-size: 18px; /* Slightly larger font size for better readability */
+}
+
+.nav-item a:hover {
+  color: #333; /* Darker color on hover for contrast */
+}
+
+/* Close Icon for Mobile */
+.close-icon {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 24px;
+  color: #0d5c50; /* Green color for close icon */
+  cursor: pointer;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  /* Hamburger Icon Visible on Small Screens */
+  .hamburger-icon {
+    display: flex;
+  }
+
+  /* Hide regular navbar menu on small screens */
+  .navbar-menu {
+    display: none;
+  }
+
+  /* Show side menu when toggled */
+  .navbar-menu.show {
+    display: flex;
+    left: 0;
+  }
+}
+
+@media (min-width: 769px) {
+  /* Regular navbar menu visible on larger screens */
+  .navbar-menu {
+    display: flex !important;
+    position: static;
+    height: auto;
+    flex-direction: row;
+    padding-top: 0;
+    width: auto;
+  }
+
+  /* Hide the hamburger icon */
+  .hamburger-icon {
+    display: none;
+  }
+
+  .navbar-nav {
+    flex-direction: row;
+  }
+
+  .nav-item {
+    padding: 0;
+    margin: 0 15px;
+  }
+
+  /* Hide the close icon on larger screens */
+  .close-icon {
+    display: none;
+  }
+}
