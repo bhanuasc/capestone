@@ -151,18 +151,7 @@
     position: relative; /* Ensure relative positioning for cart icon */
   }
 
-  .cart-icon {
-    display: none; /* Hide cart icon for larger screens */
-  }
-
-  .cart-icon-mobile {
-    display: block; /* Show mobile-specific cart icon */
-    position: absolute;
-    top: 15px;
-    right: 20px;
-    width: 20px; /* Adjust size for mobile */
-    height: auto;
-  }
+ 
 }
 
 @media (min-width: 769px) {

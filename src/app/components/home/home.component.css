@@ -165,6 +165,10 @@ p {
 
 /* Responsive Styles */
 @media (max-width: 768px) {
+    .about-us {
+        padding: 15px;
+        width: 95%;
+      }
     .hero {
         padding: 60px 15px;
     }
