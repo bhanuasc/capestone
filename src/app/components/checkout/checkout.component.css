@@ -3,31 +3,30 @@
 /* Checkout Section */
 .checkout-section {
   background-color: #ffffff; /* White background for the checkout section */
-  padding: 20px;
+  padding: 15px; /* Reduced padding for smaller screens */
   border-radius: 10px;
-  max-width: 600px; /* Adjusted width for a narrower container */
+  max-width: 100%; /* Ensure the section fits within the viewport */
   width: 100%;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin: 20px auto; /* Center the container with margin */
-  margin-top: -30px;
-  min-height: 300px;
+  margin: 10px auto; /* Reduced margin for smaller screens */
+  min-height: auto; /* Allow height to adjust based on content */
 }
 
 .checkout-section h2 {
-  font-size: 2rem;
-  margin-bottom: 20px;
+  font-size: 1.5rem; /* Adjusted font size for mobile */
+  margin-bottom: 15px; /* Reduced margin for smaller screens */
 }
 
 /* Cart Summary as Card */
 .card {
   background-color: #ffffff; /* White background for the card */
-  padding: 20px;
+  padding: 15px; /* Reduced padding for smaller screens */
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .cart-summary {
-  margin-bottom: 20px;
+  margin-bottom: 15px; /* Reduced margin for smaller screens */
 }
 
 .cart-summary ul {
@@ -43,38 +42,38 @@
 }
 
 .item-image {
-  width: 50px;
-  height: 50px;
+  width: 40px; /* Adjusted size for mobile */
+  height: 40px; /* Adjusted size for mobile */
   object-fit: cover;
   border-radius: 5px;
-  margin-right: 15px;
+  margin-right: 10px; /* Reduced margin for smaller screens */
 }
 
 .item-info {
-  font-size: 1rem;
+  font-size: 0.9rem; /* Adjusted font size for mobile */
 }
 
 /* Checkout Details as Card */
 .checkout-details {
-  margin-top: 20px;
+  margin-top: 15px; /* Reduced margin for smaller screens */
 }
 
 .checkout-details label {
   display: block;
-  margin-bottom: 15px;
+  margin-bottom: 10px; /* Reduced margin for smaller screens */
 }
 
 .checkout-details input[type="text"],
 .checkout-details textarea {
   width: 100%;
-  padding: 10px;
+  padding: 8px; /* Reduced padding for smaller screens */
   border-radius: 5px;
   border: 1px solid #e0e0e0;
-  font-size: 1rem;
+  font-size: 0.9rem; /* Adjusted font size for mobile */
 }
 
 .checkout-details textarea {
-  min-height: 100px;
+  min-height: 80px; /* Reduced height for smaller screens */
 }
 
 .checkout-details fieldset {
@@ -84,29 +83,29 @@
 }
 
 .checkout-details legend {
-  font-size: 1.2rem;
+  font-size: 1rem; /* Adjusted font size for mobile */
   margin-bottom: 10px;
 }
 
 .checkout-details label input[type="radio"] {
-  margin-right: 10px;
+  margin-right: 5px; /* Reduced margin for smaller screens */
 }
 
 .payment-details {
-  margin-top: 20px;
+  margin-top: 15px; /* Reduced margin for smaller screens */
 }
 
 .payment-details label {
   display: block;
-  margin-bottom: 10px;
+  margin-bottom: 10px; /* Reduced margin for smaller screens */
 }
 
 .payment-details input[type="text"] {
   width: 100%;
-  padding: 10px;
+  padding: 8px; /* Reduced padding for smaller screens */
   border-radius: 5px;
   border: 1px solid #e0e0e0;
-  font-size: 1rem;
+  font-size: 0.9rem; /* Adjusted font size for mobile */
 }
 
 /* Checkout Button */
@@ -114,8 +113,8 @@
   background-color: #0b3d3d; /* Match button color to navbar */
   border: none;
   color: white;
-  padding: 12px 20px;
-  font-size: 1.1rem;
+  padding: 10px 15px; /* Adjusted padding for mobile */
+  font-size: 1rem; /* Adjusted font size for mobile */
   border-radius: 5px;
   cursor: pointer;
   margin-top: 20px;
@@ -128,23 +127,25 @@
 /* Empty Cart Message */
 .checkout-section p {
   text-align: center;
-  font-size: 1.2rem;
+  font-size: 1rem; /* Adjusted font size for mobile */
   color: #666;
 }
 
 /* Alert Styles */
-/* Alert Styles */
 .alert {
   position: fixed;
-  top: 70px; /* Distance from the top of the viewport */
-  right: 10px; /* Distance from the right of the viewport */
-  padding: 15px;
+  top: 20px; /* Adjusted distance for better visibility */
+  right: 10px;
+  padding: 10px; /* Reduced padding for mobile */
   border-radius: 5px;
   background-color: #f8d7da; /* Default error color */
   color: #721c24; /* Default error text color */
   opacity: 1;
   transition: opacity 0.5s ease-out, right 0.5s ease-out; /* Smooth fade-out */
   z-index: 1000;
+  width: auto; /* Ensure the alert is not too wide */
+  max-width: 90%; /* Limit the width on smaller screens */
+  box-sizing: border-box; /* Include padding in width calculation */
 }
 
 /* Success message styles */
@@ -163,4 +164,30 @@
 .fade-out {
   opacity: 0;
   right: 20px; /* Move the alert away from the top-right corner as it fades out */
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 768px) {
+  .checkout-section {
+    padding: 15px; /* Adjusted padding for smaller screens */
+    margin: 10px auto; /* Adjusted margin for smaller screens */
+  }
+
+  .card {
+    padding: 10px; /* Reduced padding for smaller screens */
+  }
+
+  .item-image {
+    width: 30px; /* Further reduced size for mobile */
+    height: 30px; /* Further reduced size for mobile */
+  }
+
+  .item-info {
+    font-size: 0.8rem; /* Further reduced font size for mobile */
+  }
+
+  .checkout-section button {
+    padding: 10px; /* Adjusted padding for smaller screens */
+    font-size: 0.9rem; /* Adjusted font size for smaller screens */
+  }
 }
