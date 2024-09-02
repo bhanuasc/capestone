@@ -63,10 +63,8 @@
 
 .about-image img {
     width: 100%; /* Full width within its flex container */
-    height: auto; /* Adjusts height proportionally */
+    height: 450px; /* Adjusts height proportionally */
     object-fit: cover;
-    border-radius: 10px;
-    border: 1px solid #ddd; /* Light grey border */
 }
 
 /* Media queries for responsiveness */
